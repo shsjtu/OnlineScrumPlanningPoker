@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3D3D89E21AA8FC1F00B2FB70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89E11AA8FC1F00B2FB70 /* main.m */; };
 		3D3D89E51AA8FC1F00B2FB70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89E41AA8FC1F00B2FB70 /* AppDelegate.m */; };
-		3D3D89E81AA8FC1F00B2FB70 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89E71AA8FC1F00B2FB70 /* ViewController.m */; };
+		3D3D89E81AA8FC1F00B2FB70 /* OSMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89E71AA8FC1F00B2FB70 /* OSMasterViewController.m */; };
 		3D3D89EB1AA8FC1F00B2FB70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89E91AA8FC1F00B2FB70 /* Main.storyboard */; };
 		3D3D89ED1AA8FC1F00B2FB70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89EC1AA8FC1F00B2FB70 /* Images.xcassets */; };
 		3D3D89F01AA8FC1F00B2FB70 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89EE1AA8FC1F00B2FB70 /* LaunchScreen.xib */; };
@@ -32,8 +32,8 @@
 		3D3D89E11AA8FC1F00B2FB70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3D3D89E31AA8FC1F00B2FB70 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3D3D89E41AA8FC1F00B2FB70 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3D3D89E61AA8FC1F00B2FB70 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3D3D89E71AA8FC1F00B2FB70 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3D3D89E61AA8FC1F00B2FB70 /* OSMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSMasterViewController.h; sourceTree = "<group>"; };
+		3D3D89E71AA8FC1F00B2FB70 /* OSMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSMasterViewController.m; sourceTree = "<group>"; };
 		3D3D89EA1AA8FC1F00B2FB70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3D3D89EC1AA8FC1F00B2FB70 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3D3D89EF1AA8FC1F00B2FB70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -83,8 +83,8 @@
 			children = (
 				3D3D89E31AA8FC1F00B2FB70 /* AppDelegate.h */,
 				3D3D89E41AA8FC1F00B2FB70 /* AppDelegate.m */,
-				3D3D89E61AA8FC1F00B2FB70 /* ViewController.h */,
-				3D3D89E71AA8FC1F00B2FB70 /* ViewController.m */,
+				3D3D89E61AA8FC1F00B2FB70 /* OSMasterViewController.h */,
+				3D3D89E71AA8FC1F00B2FB70 /* OSMasterViewController.m */,
 				3D3D89E91AA8FC1F00B2FB70 /* Main.storyboard */,
 				3D3D89EC1AA8FC1F00B2FB70 /* Images.xcassets */,
 				3D3D89EE1AA8FC1F00B2FB70 /* LaunchScreen.xib */,
@@ -219,7 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D3D89E81AA8FC1F00B2FB70 /* ViewController.m in Sources */,
+				3D3D89E81AA8FC1F00B2FB70 /* OSMasterViewController.m in Sources */,
 				3D3D89E51AA8FC1F00B2FB70 /* AppDelegate.m in Sources */,
 				3D3D89E21AA8FC1F00B2FB70 /* main.m in Sources */,
 			);

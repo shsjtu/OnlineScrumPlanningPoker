@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 SunHan. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "OSMasterViewController.h"
 
 @interface ViewController ()
 
