@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		3D3D89E21AA8FC1F00B2FB70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89E11AA8FC1F00B2FB70 /* main.m */; };
 		3D3D89E51AA8FC1F00B2FB70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89E41AA8FC1F00B2FB70 /* AppDelegate.m */; };
-		3D3D89E81AA8FC1F00B2FB70 /* OSMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89E71AA8FC1F00B2FB70 /* OSMasterViewController.m */; };
 		3D3D89EB1AA8FC1F00B2FB70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89E91AA8FC1F00B2FB70 /* Main.storyboard */; };
 		3D3D89ED1AA8FC1F00B2FB70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89EC1AA8FC1F00B2FB70 /* Images.xcassets */; };
 		3D3D89F01AA8FC1F00B2FB70 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89EE1AA8FC1F00B2FB70 /* LaunchScreen.xib */; };
 		3D3D89FC1AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89FB1AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.m */; };
+		3DE8AEB81AD775F2002BD7D0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE8AEB71AD775F2002BD7D0 /* SystemConfiguration.framework */; };
+		3DE8AEBB1AD778CA002BD7D0 /* OSNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE8AEBA1AD778CA002BD7D0 /* OSNetworkUtil.m */; };
+		3DE8AEC01AD77C7B002BD7D0 /* OSMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE8AEBF1AD77C7B002BD7D0 /* OSMasterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +34,17 @@
 		3D3D89E11AA8FC1F00B2FB70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3D3D89E31AA8FC1F00B2FB70 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3D3D89E41AA8FC1F00B2FB70 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3D3D89E61AA8FC1F00B2FB70 /* OSMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSMasterViewController.h; sourceTree = "<group>"; };
-		3D3D89E71AA8FC1F00B2FB70 /* OSMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSMasterViewController.m; sourceTree = "<group>"; };
 		3D3D89EA1AA8FC1F00B2FB70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3D3D89EC1AA8FC1F00B2FB70 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3D3D89EF1AA8FC1F00B2FB70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3D3D89F51AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnlineScrumPlanningPokerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3D89FA1AA8FC1F00B2FB70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D3D89FB1AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OnlineScrumPlanningPokerTests.m; sourceTree = "<group>"; };
+		3DE8AEB71AD775F2002BD7D0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3DE8AEB91AD778CA002BD7D0 /* OSNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OSNetworkUtil.h; path = Util/OSNetworkUtil.h; sourceTree = "<group>"; };
+		3DE8AEBA1AD778CA002BD7D0 /* OSNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OSNetworkUtil.m; path = Util/OSNetworkUtil.m; sourceTree = "<group>"; };
+		3DE8AEBE1AD77C7B002BD7D0 /* OSMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSMasterViewController.h; sourceTree = "<group>"; };
+		3DE8AEBF1AD77C7B002BD7D0 /* OSMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSMasterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DE8AEB81AD775F2002BD7D0 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +69,7 @@
 		3D3D89D31AA8FC1F00B2FB70 = {
 			isa = PBXGroup;
 			children = (
+				3DE8AEB71AD775F2002BD7D0 /* SystemConfiguration.framework */,
 				3D3D89DE1AA8FC1F00B2FB70 /* OnlineScrumPlanningPoker */,
 				3D3D89F81AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests */,
 				3D3D89DD1AA8FC1F00B2FB70 /* Products */,
@@ -81,10 +88,10 @@
 		3D3D89DE1AA8FC1F00B2FB70 /* OnlineScrumPlanningPoker */ = {
 			isa = PBXGroup;
 			children = (
+				3DE8AEBD1AD77C7B002BD7D0 /* ViewControllers */,
+				3DE8AEBC1AD778D3002BD7D0 /* Util */,
 				3D3D89E31AA8FC1F00B2FB70 /* AppDelegate.h */,
 				3D3D89E41AA8FC1F00B2FB70 /* AppDelegate.m */,
-				3D3D89E61AA8FC1F00B2FB70 /* OSMasterViewController.h */,
-				3D3D89E71AA8FC1F00B2FB70 /* OSMasterViewController.m */,
 				3D3D89E91AA8FC1F00B2FB70 /* Main.storyboard */,
 				3D3D89EC1AA8FC1F00B2FB70 /* Images.xcassets */,
 				3D3D89EE1AA8FC1F00B2FB70 /* LaunchScreen.xib */,
@@ -117,6 +124,24 @@
 				3D3D89FA1AA8FC1F00B2FB70 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3DE8AEBC1AD778D3002BD7D0 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				3DE8AEB91AD778CA002BD7D0 /* OSNetworkUtil.h */,
+				3DE8AEBA1AD778CA002BD7D0 /* OSNetworkUtil.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		3DE8AEBD1AD77C7B002BD7D0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3DE8AEBE1AD77C7B002BD7D0 /* OSMasterViewController.h */,
+				3DE8AEBF1AD77C7B002BD7D0 /* OSMasterViewController.m */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,7 +244,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D3D89E81AA8FC1F00B2FB70 /* OSMasterViewController.m in Sources */,
+				3DE8AEC01AD77C7B002BD7D0 /* OSMasterViewController.m in Sources */,
+				3DE8AEBB1AD778CA002BD7D0 /* OSNetworkUtil.m in Sources */,
 				3D3D89E51AA8FC1F00B2FB70 /* AppDelegate.m in Sources */,
 				3D3D89E21AA8FC1F00B2FB70 /* main.m in Sources */,
 			);
@@ -346,6 +372,7 @@
 				INFOPLIST_FILE = OnlineScrumPlanningPoker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -356,6 +383,7 @@
 				INFOPLIST_FILE = OnlineScrumPlanningPoker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -412,6 +440,7 @@
 				3D3D8A011AA8FC1F00B2FB70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3D3D8A021AA8FC1F00B2FB70 /* Build configuration list for PBXNativeTarget "OnlineScrumPlanningPokerTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +449,7 @@
 				3D3D8A041AA8FC1F00B2FB70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
