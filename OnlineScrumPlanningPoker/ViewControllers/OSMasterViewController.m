@@ -8,6 +8,8 @@
 
 #import "OSMasterViewController.h"
 #import "OSNetworkUtil.h"
+#import "OSGeneric.h"
+#import "Constants.h"
 
 @interface OSMasterViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameInput;
@@ -15,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *outlineView;
 - (IBAction)hostAction:(id)sender;
 - (IBAction)joinAction:(id)sender;
-
+- (BOOL)readyForMeeting;
 @end
 
 @implementation OSMasterViewController
@@ -40,14 +42,36 @@
 }
 
 - (IBAction)hostAction:(id)sender {
-    
+    if([self readyForMeeting]) {
+        [self performSegueWithIdentifier:OSSegueIdHostToMeetingRoom sender:self];
+    }
 }
 
 - (IBAction)joinAction:(id)sender {
+    if([self readyForMeeting]) {
+        [self performSegueWithIdentifier:OSSegueIdMasterToHostsBrowser sender:self];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
 }
+
+- (BOOL)readyForMeeting {
+    if (self.nameInput.text.length == 0) {
+        [OSGeneric displayError:@"Please enter your name" fromViewController:self];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:OSSegueIdMasterToHostsBrowser]) {
+        
+    }else if([segue.identifier isEqualToString:OSSegueIdHostToMeetingRoom]) {
+        
+    }
+}
+
 @end

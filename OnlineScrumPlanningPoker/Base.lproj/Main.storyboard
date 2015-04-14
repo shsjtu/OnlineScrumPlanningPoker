@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eC7-8o-F1V">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eC7-8o-F1V">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -101,16 +101,75 @@
                         <outlet property="currentNetworkLabel" destination="xmC-27-ecc" id="gXs-QC-Ylm"/>
                         <outlet property="nameInput" destination="kJj-7r-py2" id="BJM-gf-UAx"/>
                         <outlet property="outlineView" destination="X03-aK-vxk" id="iD9-kv-sKJ"/>
+                        <segue destination="xUw-8a-OBO" kind="show" identifier="MasterToBrowserSegue" id="L03-I7-oT5"/>
+                        <segue destination="kiD-TZ-J6P" kind="show" identifier="HostToMeetingRoomSegue" id="tlQ-zl-K28"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1288" y="388"/>
+            <point key="canvasLocation" x="982" y="388"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Meetings in Network-->
+        <scene sceneID="A48-HN-UAM">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="xUw-8a-OBO" customClass="OSHostsBrowserViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8UW-3l-ATt"/>
+                        <viewControllerLayoutGuide type="bottom" id="5rh-cq-Bri"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YFf-iW-h49">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9To-Ib-yb9">
+                                <rect key="frame" x="21" y="89" width="558" height="481"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="xUw-8a-OBO" id="caC-K8-owO"/>
+                                    <outlet property="delegate" destination="xUw-8a-OBO" id="3el-8Z-dQl"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="9To-Ib-yb9" secondAttribute="trailing" constant="5" id="2eI-Ea-8Jt"/>
+                            <constraint firstItem="5rh-cq-Bri" firstAttribute="top" secondItem="9To-Ib-yb9" secondAttribute="bottom" constant="30" id="E4s-87-Vtl"/>
+                            <constraint firstItem="9To-Ib-yb9" firstAttribute="top" secondItem="8UW-3l-ATt" secondAttribute="bottom" constant="25" id="LWs-XB-ZhG"/>
+                            <constraint firstItem="9To-Ib-yb9" firstAttribute="leading" secondItem="YFf-iW-h49" secondAttribute="leadingMargin" constant="5" id="o1z-pr-M3P"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Meetings in Network" id="yVs-Uc-QMm"/>
+                    <connections>
+                        <outlet property="hostsTableView" destination="9To-Ib-yb9" id="Il3-YC-5tr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Svm-ep-NwU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1696" y="11"/>
+        </scene>
+        <!--Meeting Room-->
+        <scene sceneID="rkY-a6-jJD">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="kiD-TZ-J6P" customClass="OSMeetingRoomViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MEJ-1B-783"/>
+                        <viewControllerLayoutGuide type="bottom" id="qts-3f-Mb2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dei-Oo-htL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Meeting Room" id="lfB-v2-8rU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mXg-dc-XlW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1696" y="799"/>
+        </scene>
+        <!--Root Navigation Controller-->
         <scene sceneID="KBh-fK-2br">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eC7-8o-F1V" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eC7-8o-F1V" customClass="OSRootNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6e8-0l-dKm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

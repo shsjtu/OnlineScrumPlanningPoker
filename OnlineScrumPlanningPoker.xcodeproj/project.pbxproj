@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D3A8D3D1ADB695C00335C8C /* OSRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A8D3C1ADB695C00335C8C /* OSRootNavigationController.m */; };
+		3D3A8D431ADCA34E00335C8C /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A8D421ADCA34E00335C8C /* GCDAsyncSocket.m */; };
+		3D3A8D461ADCBC3600335C8C /* OSMeetingRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A8D451ADCBC3600335C8C /* OSMeetingRoomViewController.m */; };
+		3D3A8D4F1ADCC1E900335C8C /* OSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A8D4E1ADCC1E900335C8C /* OSUser.m */; };
+		3D3A8D521ADCC27E00335C8C /* OSHostUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A8D511ADCC27E00335C8C /* OSHostUser.m */; };
+		3D3A8D551ADCC3A300335C8C /* OSGeneric.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A8D541ADCC3A300335C8C /* OSGeneric.m */; };
 		3D3D89E21AA8FC1F00B2FB70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89E11AA8FC1F00B2FB70 /* main.m */; };
 		3D3D89E51AA8FC1F00B2FB70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89E41AA8FC1F00B2FB70 /* AppDelegate.m */; };
 		3D3D89EB1AA8FC1F00B2FB70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89E91AA8FC1F00B2FB70 /* Main.storyboard */; };
@@ -16,6 +22,7 @@
 		3DE8AEB81AD775F2002BD7D0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE8AEB71AD775F2002BD7D0 /* SystemConfiguration.framework */; };
 		3DE8AEBB1AD778CA002BD7D0 /* OSNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE8AEBA1AD778CA002BD7D0 /* OSNetworkUtil.m */; };
 		3DE8AEC01AD77C7B002BD7D0 /* OSMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE8AEBF1AD77C7B002BD7D0 /* OSMasterViewController.m */; };
+		3DE8AEC31ADAF673002BD7D0 /* OSHostsBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE8AEC21ADAF673002BD7D0 /* OSHostsBrowserViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +36,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D3A8D3A1ADB51C700335C8C /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Util/Constants.h; sourceTree = "<group>"; };
+		3D3A8D3B1ADB695C00335C8C /* OSRootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSRootNavigationController.h; sourceTree = "<group>"; };
+		3D3A8D3C1ADB695C00335C8C /* OSRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSRootNavigationController.m; sourceTree = "<group>"; };
+		3D3A8D411ADCA34E00335C8C /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		3D3A8D421ADCA34E00335C8C /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		3D3A8D441ADCBC3600335C8C /* OSMeetingRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSMeetingRoomViewController.h; sourceTree = "<group>"; };
+		3D3A8D451ADCBC3600335C8C /* OSMeetingRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSMeetingRoomViewController.m; sourceTree = "<group>"; };
+		3D3A8D4D1ADCC1E900335C8C /* OSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSUser.h; sourceTree = "<group>"; };
+		3D3A8D4E1ADCC1E900335C8C /* OSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSUser.m; sourceTree = "<group>"; };
+		3D3A8D501ADCC27E00335C8C /* OSHostUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSHostUser.h; sourceTree = "<group>"; };
+		3D3A8D511ADCC27E00335C8C /* OSHostUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSHostUser.m; sourceTree = "<group>"; };
+		3D3A8D531ADCC3A300335C8C /* OSGeneric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OSGeneric.h; path = Util/OSGeneric.h; sourceTree = "<group>"; };
+		3D3A8D541ADCC3A300335C8C /* OSGeneric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OSGeneric.m; path = Util/OSGeneric.m; sourceTree = "<group>"; };
 		3D3D89DC1AA8FC1F00B2FB70 /* OnlineScrumPlanningPoker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlineScrumPlanningPoker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3D89E01AA8FC1F00B2FB70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D3D89E11AA8FC1F00B2FB70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -45,6 +65,8 @@
 		3DE8AEBA1AD778CA002BD7D0 /* OSNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OSNetworkUtil.m; path = Util/OSNetworkUtil.m; sourceTree = "<group>"; };
 		3DE8AEBE1AD77C7B002BD7D0 /* OSMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSMasterViewController.h; sourceTree = "<group>"; };
 		3DE8AEBF1AD77C7B002BD7D0 /* OSMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSMasterViewController.m; sourceTree = "<group>"; };
+		3DE8AEC11ADAF673002BD7D0 /* OSHostsBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSHostsBrowserViewController.h; sourceTree = "<group>"; };
+		3DE8AEC21ADAF673002BD7D0 /* OSHostsBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSHostsBrowserViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +88,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D3A8D401ADCA34E00335C8C /* CocoaAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				3D3A8D411ADCA34E00335C8C /* GCDAsyncSocket.h */,
+				3D3A8D421ADCA34E00335C8C /* GCDAsyncSocket.m */,
+			);
+			path = CocoaAsyncSocket;
+			sourceTree = "<group>";
+		};
+		3D3A8D4C1ADCC1E900335C8C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3D3A8D4D1ADCC1E900335C8C /* OSUser.h */,
+				3D3A8D4E1ADCC1E900335C8C /* OSUser.m */,
+				3D3A8D501ADCC27E00335C8C /* OSHostUser.h */,
+				3D3A8D511ADCC27E00335C8C /* OSHostUser.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3D3D89D31AA8FC1F00B2FB70 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +130,8 @@
 		3D3D89DE1AA8FC1F00B2FB70 /* OnlineScrumPlanningPoker */ = {
 			isa = PBXGroup;
 			children = (
+				3D3A8D4C1ADCC1E900335C8C /* Model */,
+				3D3A8D401ADCA34E00335C8C /* CocoaAsyncSocket */,
 				3DE8AEBD1AD77C7B002BD7D0 /* ViewControllers */,
 				3DE8AEBC1AD778D3002BD7D0 /* Util */,
 				3D3D89E31AA8FC1F00B2FB70 /* AppDelegate.h */,
@@ -131,6 +175,9 @@
 			children = (
 				3DE8AEB91AD778CA002BD7D0 /* OSNetworkUtil.h */,
 				3DE8AEBA1AD778CA002BD7D0 /* OSNetworkUtil.m */,
+				3D3A8D3A1ADB51C700335C8C /* Constants.h */,
+				3D3A8D531ADCC3A300335C8C /* OSGeneric.h */,
+				3D3A8D541ADCC3A300335C8C /* OSGeneric.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -140,6 +187,12 @@
 			children = (
 				3DE8AEBE1AD77C7B002BD7D0 /* OSMasterViewController.h */,
 				3DE8AEBF1AD77C7B002BD7D0 /* OSMasterViewController.m */,
+				3DE8AEC11ADAF673002BD7D0 /* OSHostsBrowserViewController.h */,
+				3DE8AEC21ADAF673002BD7D0 /* OSHostsBrowserViewController.m */,
+				3D3A8D3B1ADB695C00335C8C /* OSRootNavigationController.h */,
+				3D3A8D3C1ADB695C00335C8C /* OSRootNavigationController.m */,
+				3D3A8D441ADCBC3600335C8C /* OSMeetingRoomViewController.h */,
+				3D3A8D451ADCBC3600335C8C /* OSMeetingRoomViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -244,10 +297,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D3A8D521ADCC27E00335C8C /* OSHostUser.m in Sources */,
+				3DE8AEC31ADAF673002BD7D0 /* OSHostsBrowserViewController.m in Sources */,
 				3DE8AEC01AD77C7B002BD7D0 /* OSMasterViewController.m in Sources */,
+				3D3A8D551ADCC3A300335C8C /* OSGeneric.m in Sources */,
 				3DE8AEBB1AD778CA002BD7D0 /* OSNetworkUtil.m in Sources */,
 				3D3D89E51AA8FC1F00B2FB70 /* AppDelegate.m in Sources */,
 				3D3D89E21AA8FC1F00B2FB70 /* main.m in Sources */,
+				3D3A8D431ADCA34E00335C8C /* GCDAsyncSocket.m in Sources */,
+				3D3A8D3D1ADB695C00335C8C /* OSRootNavigationController.m in Sources */,
+				3D3A8D4F1ADCC1E900335C8C /* OSUser.m in Sources */,
+				3D3A8D461ADCBC3600335C8C /* OSMeetingRoomViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
