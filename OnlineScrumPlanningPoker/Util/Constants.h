@@ -9,10 +9,26 @@
 #ifndef OnlineScrumPlanningPoker_Constants_h
 #define OnlineScrumPlanningPoker_Constants_h
 
-#define OSSegueIdMasterToHostsBrowser @"MasterToBrowserSegue"
-#define OSSegueIdHostToMeetingRoom @"HostToMeetingRoomSegue"
+#define kOSSegueIdMasterToHostsBrowser @"MasterToBrowserSegue"
+#define kOSSegueIdHostToMeetingRoom @"HostToMeetingRoomSegue"
 
-#define OSBonjourServiceType @"_online_scrum_services._tcp."
-#define OSBonjourServiceDomain @"local."
+#define kOSBonjourServiceType @"_online_scrum_services._tcp."
+#define kOSBonjourServiceDomain @"local."
 
+typedef enum OSEstimationSize{
+    kOSEstimationSize_Reserved = 0,
+    kOSEstimationSize_XS,
+    kOSEstimationSize_S,
+    kOSEstimationSize_M,
+    kOSEstimationSize_L,
+    kOSEstimationSize_XL,
+    kOSEstimationSize_2XL,
+    kOSEstimationSize_3XL,
+    kOSEstimationSize_4XL,
+    kOSEstimationSize_5XL,
+    kOSEstimationSize_Customize
+} OSEstimationSize;
+
+static NSString* kOSEstimationSizeStringSet[] = {@"Reserved",@"XS",@"S",@"M",@"L",@"XL",@"2XL",@"3XL",@"4XL",@"5XL",@"Customize"};
+static NSInteger kOSEstimationSizePointSet[] = {0,1,2,3,5,8,13,21,34,55,-1};
 #endif

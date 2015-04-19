@@ -36,7 +36,7 @@
     
     // Configure Service Browser
     [self.serviceBrowser setDelegate:self];
-    [self.serviceBrowser searchForServicesOfType:OSBonjourServiceType inDomain:OSBonjourServiceDomain];
+    [self.serviceBrowser searchForServicesOfType:kOSBonjourServiceType inDomain:kOSBonjourServiceDomain];
 }
 
 - (void)stopBrowsing {

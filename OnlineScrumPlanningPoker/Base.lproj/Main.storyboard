@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eC7-8o-F1V">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eC7-8o-F1V">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Choose Your Role-->
+        <!--Start Scrum Meeting-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="OSMasterViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="OSMasterViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -27,80 +27,39 @@
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My WIFI: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmC-27-ecc">
                                 <rect key="frame" x="31" y="164" width="538" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.50196081399917603" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="0.69019607843137254" green="0.12156862745098039" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X03-aK-vxk" userLabel="View - Action group">
-                                <rect key="frame" x="21" y="330" width="558" height="200"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you are scrum master, please go ahead to host your meeting, and invite your team members to join the meeting by your name." lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="06H-QZ-rVi">
-                                        <rect key="frame" x="20" y="15" width="518" height="41"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WnP-aF-Bma">
-                                        <rect key="frame" x="157" y="140" width="105" height="30"/>
-                                        <state key="normal" title="Host a meeting">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="50" y="315" width="300" height="30"/>
-                                        </variation>
-                                        <variation key="heightClass=compact-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="50" y="315" width="300" height="30"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="hostAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Kk6-av-fWh"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nB8-U2-m4w">
-                                        <rect key="frame" x="299" y="140" width="101" height="30"/>
-                                        <state key="normal" title="Join a meeting">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="50" y="315" width="300" height="30"/>
-                                        </variation>
-                                        <variation key="heightClass=compact-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="50" y="315" width="300" height="30"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="joinAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pw5-EO-r7g"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PcS-pR-3aR">
+                                <rect key="frame" x="21" y="220" width="558" height="110"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="nB8-U2-m4w" secondAttribute="bottom" constant="30" id="3BM-OI-8Id"/>
-                                    <constraint firstAttribute="centerX" secondItem="nB8-U2-m4w" secondAttribute="centerX" constant="-70" id="5Kc-TX-bdd"/>
-                                    <constraint firstAttribute="height" constant="200" id="9ma-bz-0mK"/>
-                                    <constraint firstAttribute="trailing" secondItem="06H-QZ-rVi" secondAttribute="trailing" constant="20" id="9uO-lt-JrS"/>
-                                    <constraint firstAttribute="centerX" secondItem="WnP-aF-Bma" secondAttribute="centerX" constant="70" id="GWJ-qR-7gc"/>
-                                    <constraint firstAttribute="bottom" secondItem="WnP-aF-Bma" secondAttribute="bottom" constant="30" id="XoC-wj-F2g"/>
-                                    <constraint firstItem="06H-QZ-rVi" firstAttribute="leading" secondItem="X03-aK-vxk" secondAttribute="leading" constant="20" id="rH5-SX-SK2"/>
-                                    <constraint firstItem="06H-QZ-rVi" firstAttribute="top" secondItem="X03-aK-vxk" secondAttribute="top" constant="15" id="skz-gr-VZc"/>
+                                    <constraint firstAttribute="height" constant="110" id="sY0-Fk-AGZ"/>
                                 </constraints>
-                            </view>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="OlE-XA-EBJ"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="gwd-6u-7Q6"/>
+                                </connections>
+                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="kJj-7r-py2" secondAttribute="trailing" constant="15" id="50D-Qf-Ehh"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="X03-aK-vxk" secondAttribute="bottom" constant="70" id="AvC-5i-6J5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PcS-pR-3aR" secondAttribute="trailing" constant="5" id="5Ff-xO-IWZ"/>
+                            <constraint firstItem="PcS-pR-3aR" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="5" id="GGY-Ab-zWq"/>
                             <constraint firstItem="kJj-7r-py2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="15" id="Z3E-gT-uQW"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="X03-aK-vxk" secondAttribute="trailing" constant="5" id="d2b-0v-fe7"/>
                             <constraint firstItem="xmC-27-ecc" firstAttribute="trailing" secondItem="kJj-7r-py2" secondAttribute="trailing" id="dX4-jx-zcl"/>
-                            <constraint firstItem="X03-aK-vxk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="5" id="dYF-1L-1UA"/>
                             <constraint firstItem="xmC-27-ecc" firstAttribute="top" secondItem="kJj-7r-py2" secondAttribute="bottom" constant="35" id="g41-VX-et8"/>
                             <constraint firstItem="xmC-27-ecc" firstAttribute="leading" secondItem="kJj-7r-py2" secondAttribute="leading" id="pzd-o3-Hc7"/>
                             <constraint firstItem="kJj-7r-py2" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="35" id="r8A-ed-ypr"/>
+                            <constraint firstItem="PcS-pR-3aR" firstAttribute="top" secondItem="xmC-27-ecc" secondAttribute="bottom" constant="35" id="y6I-yz-AVd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose Your Role" id="6Sr-ia-bcQ"/>
+                    <navigationItem key="navigationItem" title="Start Scrum Meeting" id="6Sr-ia-bcQ"/>
                     <connections>
                         <outlet property="currentNetworkLabel" destination="xmC-27-ecc" id="gXs-QC-Ylm"/>
                         <outlet property="nameInput" destination="kJj-7r-py2" id="BJM-gf-UAx"/>
-                        <outlet property="outlineView" destination="X03-aK-vxk" id="iD9-kv-sKJ"/>
                         <segue destination="xUw-8a-OBO" kind="show" identifier="MasterToBrowserSegue" id="L03-I7-oT5"/>
                         <segue destination="kiD-TZ-J6P" kind="show" identifier="HostToMeetingRoomSegue" id="tlQ-zl-K28"/>
                     </connections>
@@ -158,9 +117,61 @@
                     <view key="view" contentMode="scaleToFill" id="Dei-Oo-htL">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Planning Meeting!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goa-4J-Efd">
+                                <rect key="frame" x="31" y="84" width="538" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                <color key="textColor" red="0.69019607839999997" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt; Swipte to change &gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVU-kr-oNy">
+                                <rect key="frame" x="227" y="120" width="147" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fug-01-BeM" customClass="OSPokerBaseView">
+                                <rect key="frame" x="235" y="143" width="130" height="75"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="Bh5-cn-8Rz"/>
+                                    <constraint firstAttribute="width" constant="130" id="hYG-cJ-XS7"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqY-LX-qok">
+                                <rect key="frame" x="280" y="233" width="41" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Vote!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7Et-2o-xar">
+                                <rect key="frame" x="21" y="287" width="568" height="298"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="fug-01-BeM" secondAttribute="centerX" id="AN8-ec-Azz"/>
+                            <constraint firstItem="goa-4J-Efd" firstAttribute="top" secondItem="MEJ-1B-783" secondAttribute="bottom" constant="20" id="ECO-Qc-wBL"/>
+                            <constraint firstAttribute="centerX" secondItem="IqY-LX-qok" secondAttribute="centerX" id="GDo-d7-St1"/>
+                            <constraint firstItem="fug-01-BeM" firstAttribute="top" secondItem="WVU-kr-oNy" secondAttribute="bottom" constant="5" id="Jmg-dG-wS8"/>
+                            <constraint firstItem="IqY-LX-qok" firstAttribute="top" secondItem="fug-01-BeM" secondAttribute="bottom" constant="15" id="OfY-y4-wSL"/>
+                            <constraint firstItem="7Et-2o-xar" firstAttribute="trailing" secondItem="Dei-Oo-htL" secondAttribute="trailingMargin" constant="5" id="Qa0-cM-AHr"/>
+                            <constraint firstItem="7Et-2o-xar" firstAttribute="leading" secondItem="Dei-Oo-htL" secondAttribute="leadingMargin" constant="5" id="TcW-eZ-HKA"/>
+                            <constraint firstAttribute="centerX" secondItem="WVU-kr-oNy" secondAttribute="centerX" id="eTc-Sw-lvJ"/>
+                            <constraint firstItem="goa-4J-Efd" firstAttribute="leading" secondItem="Dei-Oo-htL" secondAttribute="leadingMargin" constant="15" id="fTz-LK-89L"/>
+                            <constraint firstItem="WVU-kr-oNy" firstAttribute="top" secondItem="goa-4J-Efd" secondAttribute="bottom" constant="15" id="nIe-X0-sof"/>
+                            <constraint firstItem="qts-3f-Mb2" firstAttribute="top" secondItem="7Et-2o-xar" secondAttribute="bottom" constant="15" id="qSm-nd-Lj7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="goa-4J-Efd" secondAttribute="trailing" constant="15" id="ugM-5M-Igw"/>
+                            <constraint firstItem="7Et-2o-xar" firstAttribute="top" secondItem="IqY-LX-qok" secondAttribute="bottom" constant="20" id="w2E-c6-wad"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Meeting Room" id="lfB-v2-8rU"/>
+                    <connections>
+                        <outlet property="pokerView" destination="fug-01-BeM" id="zyP-eO-tMD"/>
+                        <outlet property="welcomeLabel" destination="goa-4J-Efd" id="kL1-i8-aNo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mXg-dc-XlW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

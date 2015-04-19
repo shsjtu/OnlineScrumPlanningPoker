@@ -7,7 +7,22 @@
 //
 
 #import "OSMeetingRoomViewController.h"
+#import "OSHostUser.h"
+#import "OSPokerBaseView.h"
+
+@interface OSMeetingRoomViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
+@property (weak, nonatomic) IBOutlet OSPokerBaseView *pokerView;
+
+@end
 
 @implementation OSMeetingRoomViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    if(self.user.name.length > 0){
+        self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome to %@'s meeting",self.user.name];
+    }
+}
 
 @end

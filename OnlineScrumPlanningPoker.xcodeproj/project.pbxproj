@@ -13,6 +13,8 @@
 		3D3A8D4F1ADCC1E900335C8C /* OSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A8D4E1ADCC1E900335C8C /* OSUser.m */; };
 		3D3A8D521ADCC27E00335C8C /* OSHostUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A8D511ADCC27E00335C8C /* OSHostUser.m */; };
 		3D3A8D551ADCC3A300335C8C /* OSGeneric.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A8D541ADCC3A300335C8C /* OSGeneric.m */; };
+		3D3A8D591AE06FE500335C8C /* OSPokerBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A8D581AE06FE500335C8C /* OSPokerBaseView.m */; };
+		3D3A8D5C1AE0A73700335C8C /* UIColor+More.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A8D5B1AE0A73700335C8C /* UIColor+More.m */; };
 		3D3D89E21AA8FC1F00B2FB70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89E11AA8FC1F00B2FB70 /* main.m */; };
 		3D3D89E51AA8FC1F00B2FB70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89E41AA8FC1F00B2FB70 /* AppDelegate.m */; };
 		3D3D89EB1AA8FC1F00B2FB70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89E91AA8FC1F00B2FB70 /* Main.storyboard */; };
@@ -49,6 +51,10 @@
 		3D3A8D511ADCC27E00335C8C /* OSHostUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSHostUser.m; sourceTree = "<group>"; };
 		3D3A8D531ADCC3A300335C8C /* OSGeneric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OSGeneric.h; path = Util/OSGeneric.h; sourceTree = "<group>"; };
 		3D3A8D541ADCC3A300335C8C /* OSGeneric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OSGeneric.m; path = Util/OSGeneric.m; sourceTree = "<group>"; };
+		3D3A8D571AE06FE500335C8C /* OSPokerBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPokerBaseView.h; sourceTree = "<group>"; };
+		3D3A8D581AE06FE500335C8C /* OSPokerBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPokerBaseView.m; sourceTree = "<group>"; };
+		3D3A8D5A1AE0A73700335C8C /* UIColor+More.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+More.h"; path = "Util/UIColor+More.h"; sourceTree = "<group>"; };
+		3D3A8D5B1AE0A73700335C8C /* UIColor+More.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+More.m"; path = "Util/UIColor+More.m"; sourceTree = "<group>"; };
 		3D3D89DC1AA8FC1F00B2FB70 /* OnlineScrumPlanningPoker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlineScrumPlanningPoker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3D89E01AA8FC1F00B2FB70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D3D89E11AA8FC1F00B2FB70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -108,6 +114,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		3D3A8D561AE06F9400335C8C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3D3A8D571AE06FE500335C8C /* OSPokerBaseView.h */,
+				3D3A8D581AE06FE500335C8C /* OSPokerBaseView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		3D3D89D31AA8FC1F00B2FB70 = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +145,7 @@
 		3D3D89DE1AA8FC1F00B2FB70 /* OnlineScrumPlanningPoker */ = {
 			isa = PBXGroup;
 			children = (
+				3D3A8D561AE06F9400335C8C /* Views */,
 				3D3A8D4C1ADCC1E900335C8C /* Model */,
 				3D3A8D401ADCA34E00335C8C /* CocoaAsyncSocket */,
 				3DE8AEBD1AD77C7B002BD7D0 /* ViewControllers */,
@@ -178,6 +194,8 @@
 				3D3A8D3A1ADB51C700335C8C /* Constants.h */,
 				3D3A8D531ADCC3A300335C8C /* OSGeneric.h */,
 				3D3A8D541ADCC3A300335C8C /* OSGeneric.m */,
+				3D3A8D5A1AE0A73700335C8C /* UIColor+More.h */,
+				3D3A8D5B1AE0A73700335C8C /* UIColor+More.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -246,6 +264,7 @@
 				TargetAttributes = {
 					3D3D89DB1AA8FC1F00B2FB70 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 7R2X626W9J;
 					};
 					3D3D89F41AA8FC1F00B2FB70 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -306,7 +325,9 @@
 				3D3D89E21AA8FC1F00B2FB70 /* main.m in Sources */,
 				3D3A8D431ADCA34E00335C8C /* GCDAsyncSocket.m in Sources */,
 				3D3A8D3D1ADB695C00335C8C /* OSRootNavigationController.m in Sources */,
+				3D3A8D591AE06FE500335C8C /* OSPokerBaseView.m in Sources */,
 				3D3A8D4F1ADCC1E900335C8C /* OSUser.m in Sources */,
+				3D3A8D5C1AE0A73700335C8C /* UIColor+More.m in Sources */,
 				3D3A8D461ADCBC3600335C8C /* OSMeetingRoomViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,9 +450,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = OnlineScrumPlanningPoker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -440,9 +464,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = OnlineScrumPlanningPoker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

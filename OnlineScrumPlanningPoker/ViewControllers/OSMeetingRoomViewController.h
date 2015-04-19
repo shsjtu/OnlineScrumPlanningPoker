@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class OSUser;
 @interface OSMeetingRoomViewController : UIViewController
+@property (strong, nonatomic) OSUser* user;
 
 @end
