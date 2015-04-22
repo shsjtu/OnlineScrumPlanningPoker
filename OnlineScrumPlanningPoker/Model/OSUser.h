@@ -10,4 +10,6 @@
 
 @interface OSUser : NSObject
 @property (strong, nonatomic) NSString *name;
+- (void)startMeeting;
+- (NSString*)hostName;
 @end

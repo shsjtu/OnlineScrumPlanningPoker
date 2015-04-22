@@ -11,6 +11,7 @@
 
 #define kOSSegueIdMasterToHostsBrowser @"MasterToBrowserSegue"
 #define kOSSegueIdHostToMeetingRoom @"HostToMeetingRoomSegue"
+#define kOSSegueIdGuestToMeetingRoom @"GuestToMeetingRoomSegue"
 
 #define kOSBonjourServiceType @"_online_scrum_services._tcp."
 #define kOSBonjourServiceDomain @"local."

@@ -9,9 +9,11 @@
 #import "OSMasterViewController.h"
 #import "OSNetworkUtil.h"
 #import "OSGeneric.h"
-#import "Constants.h"
+#import "OSConstants.h"
 #import "OSMeetingRoomViewController.h"
+#import "OSHostsBrowserViewController.h"
 #import "OSHostUser.h"
+#import "OSGuestUser.h"
 
 #define kActionCell @"ActionCell"
 
@@ -27,10 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.outlineView.backgroundColor = [UIColor clearColor];
-    //self.outlineView.layer.borderColor = [UIColor colorWithWhite:0.8 alpha:1.0].CGColor;
-    //self.outlineView.layer.borderWidth = 2.0f;
-    //self.outlineView.layer.cornerRadius = 8.0f;
     NSString* ssid = [OSNetworkUtil wifiSSID];
     if(ssid) {
         self.currentNetworkLabel.text = [NSString stringWithFormat:@"My WIFI: \"%@\"", ssid];
@@ -71,7 +69,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:kOSSegueIdMasterToHostsBrowser]) {
-        
+        OSGuestUser* guestUser = [[OSGuestUser alloc] init];
+        guestUser.name = self.nameInput.text;
+        OSHostsBrowserViewController* browserController = segue.destinationViewController;
+        browserController.guestUser = guestUser;
     }else if([segue.identifier isEqualToString:kOSSegueIdHostToMeetingRoom]) {
         OSUser* user = [[OSHostUser alloc] init];
         user.name = self.nameInput.text;

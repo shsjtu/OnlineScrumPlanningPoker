@@ -7,77 +7,46 @@
 //
 
 #import "OSHostsBrowserViewController.h"
-#import "Constants.h"
+#import "OSMeetingRoomViewController.h"
+#import "OSConstants.h"
+#import "OSGuestUser.h"
+#import "OSGeneric.h"
+
 
 #define HostsBrowserCellIdentifier @"HostsBrowserCellIdentifier"
 
-@interface OSHostsBrowserViewController () <NSNetServiceBrowserDelegate>
+@interface OSHostsBrowserViewController () <OSGuestUserDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *hostsTableView;
-@property (strong, nonatomic) NSMutableArray *services;
-@property (strong, nonatomic) NSNetServiceBrowser *serviceBrowser;
 @end
 
 @implementation OSHostsBrowserViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self startBrowsing];
+    [self.guestUser setDelegate:self];
+    [self.guestUser startBrowsing];
 }
 
-- (void)startBrowsing {
-    if (self.services) {
-        [self.services removeAllObjects];
-    } else {
-        self.services = [[NSMutableArray alloc] init];
-    }
-    
-    // Initialize Service Browser
-    self.serviceBrowser = [[NSNetServiceBrowser alloc] init];
-    
-    // Configure Service Browser
-    [self.serviceBrowser setDelegate:self];
-    [self.serviceBrowser searchForServicesOfType:kOSBonjourServiceType inDomain:kOSBonjourServiceDomain];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+     if([segue.identifier isEqualToString:kOSSegueIdGuestToMeetingRoom]) {
+         OSMeetingRoomViewController* meetingController = segue.destinationViewController;
+         meetingController.user = self.guestUser;
+     }
 }
 
-- (void)stopBrowsing {
-    if (self.serviceBrowser) {
-        [self.serviceBrowser stop];
-        [self.serviceBrowser setDelegate:nil];
-        [self setServiceBrowser:nil];
-    }
+#pragma mark - OSGuestUserDelegate
+- (void)didUpdateHosts {
+    [self.hostsTableView reloadData];
 }
 
-#pragma mark - NSNetServiceBrowserDelegate
-- (void)netServiceBrowser:(NSNetServiceBrowser *)serviceBrowser didFindService:(NSNetService *)service moreComing:(BOOL)moreComing {
-    // Update Services
-    @synchronized (self){
-        [self.services addObject:service];
-    }
-    if(!moreComing) {
-        // Sort Services
-        [self.services sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
-        [self.hostsTableView reloadData];
-    }
+- (void)connectHostSuccess {
+    //[self.navigationController popViewControllerAnimated:NO];
+    [self performSegueWithIdentifier:kOSSegueIdGuestToMeetingRoom sender:self];
 }
 
-- (void)netServiceBrowser:(NSNetServiceBrowser *)serviceBrowser didRemoveService:(NSNetService *)service moreComing:(BOOL)moreComing {
-    // Update Services
-    @synchronized (self){
-        [self.services removeObject:service];
-    }
-    if(!moreComing) {
-        [self.hostsTableView reloadData];
-    }
+- (void)connectHostError:(NSError*)error {
+    [OSGeneric displayError:[NSString stringWithFormat:@"Cannot connect to host (%@ - %zd)", error.domain, error.code] fromViewController:self];
 }
-
-- (void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)serviceBrowser {
-    [self stopBrowsing];
-}
-
-- (void)netServiceBrowser:(NSNetServiceBrowser *)aBrowser didNotSearch:(NSDictionary *)userInfo {
-    [self stopBrowsing];
-}
-
 
 #pragma mark - UITableViewDataSource / UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -85,22 +54,26 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.services count];
+    return [self.guestUser numberOfHosts];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return [NSString stringWithFormat:@"%zd meetings in network", [self.guestUser numberOfHosts]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HostsBrowserCellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:HostsBrowserCellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    if(indexPath.row >= self.services.count) {
-        cell.textLabel.text = @"***";
-    }else{
-        NSNetService* service = self.services[indexPath.row];
-        cell.textLabel.text = service.name;
-    }
-    
+    cell.textLabel.text = [self.guestUser nameOfHostAtIndex:indexPath.row];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.guestUser resolveHostAtIndex:indexPath.row];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 @end

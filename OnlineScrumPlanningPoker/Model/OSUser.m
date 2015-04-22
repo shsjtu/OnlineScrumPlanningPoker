@@ -10,4 +10,11 @@
 
 @implementation OSUser
 
+- (void)startMeeting {
+    NSAssert(NO, @"Subclasses need to overwrite this method");
+}
+- (NSString*)hostName {
+    NSAssert(NO, @"Subclasses need to overwrite this method");
+    return nil;
+}
 @end

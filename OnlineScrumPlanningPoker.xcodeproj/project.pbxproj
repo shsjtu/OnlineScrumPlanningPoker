@@ -21,6 +21,7 @@
 		3D3D89ED1AA8FC1F00B2FB70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89EC1AA8FC1F00B2FB70 /* Images.xcassets */; };
 		3D3D89F01AA8FC1F00B2FB70 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89EE1AA8FC1F00B2FB70 /* LaunchScreen.xib */; };
 		3D3D89FC1AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89FB1AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.m */; };
+		3DCCCB0A1AE428F7002A334C /* OSGuestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCCCB091AE428F7002A334C /* OSGuestUser.m */; };
 		3DE8AEB81AD775F2002BD7D0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE8AEB71AD775F2002BD7D0 /* SystemConfiguration.framework */; };
 		3DE8AEBB1AD778CA002BD7D0 /* OSNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE8AEBA1AD778CA002BD7D0 /* OSNetworkUtil.m */; };
 		3DE8AEC01AD77C7B002BD7D0 /* OSMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE8AEBF1AD77C7B002BD7D0 /* OSMasterViewController.m */; };
@@ -38,7 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3D3A8D3A1ADB51C700335C8C /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Util/Constants.h; sourceTree = "<group>"; };
+		3D3A8D3A1ADB51C700335C8C /* OSConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OSConstants.h; path = Util/OSConstants.h; sourceTree = "<group>"; };
 		3D3A8D3B1ADB695C00335C8C /* OSRootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSRootNavigationController.h; sourceTree = "<group>"; };
 		3D3A8D3C1ADB695C00335C8C /* OSRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSRootNavigationController.m; sourceTree = "<group>"; };
 		3D3A8D411ADCA34E00335C8C /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -66,6 +67,8 @@
 		3D3D89F51AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnlineScrumPlanningPokerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3D89FA1AA8FC1F00B2FB70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D3D89FB1AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OnlineScrumPlanningPokerTests.m; sourceTree = "<group>"; };
+		3DCCCB081AE428F7002A334C /* OSGuestUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSGuestUser.h; sourceTree = "<group>"; };
+		3DCCCB091AE428F7002A334C /* OSGuestUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSGuestUser.m; sourceTree = "<group>"; };
 		3DE8AEB71AD775F2002BD7D0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3DE8AEB91AD778CA002BD7D0 /* OSNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OSNetworkUtil.h; path = Util/OSNetworkUtil.h; sourceTree = "<group>"; };
 		3DE8AEBA1AD778CA002BD7D0 /* OSNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OSNetworkUtil.m; path = Util/OSNetworkUtil.m; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 				3D3A8D4E1ADCC1E900335C8C /* OSUser.m */,
 				3D3A8D501ADCC27E00335C8C /* OSHostUser.h */,
 				3D3A8D511ADCC27E00335C8C /* OSHostUser.m */,
+				3DCCCB081AE428F7002A334C /* OSGuestUser.h */,
+				3DCCCB091AE428F7002A334C /* OSGuestUser.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,7 +196,7 @@
 			children = (
 				3DE8AEB91AD778CA002BD7D0 /* OSNetworkUtil.h */,
 				3DE8AEBA1AD778CA002BD7D0 /* OSNetworkUtil.m */,
-				3D3A8D3A1ADB51C700335C8C /* Constants.h */,
+				3D3A8D3A1ADB51C700335C8C /* OSConstants.h */,
 				3D3A8D531ADCC3A300335C8C /* OSGeneric.h */,
 				3D3A8D541ADCC3A300335C8C /* OSGeneric.m */,
 				3D3A8D5A1AE0A73700335C8C /* UIColor+More.h */,
@@ -327,6 +332,7 @@
 				3D3A8D3D1ADB695C00335C8C /* OSRootNavigationController.m in Sources */,
 				3D3A8D591AE06FE500335C8C /* OSPokerBaseView.m in Sources */,
 				3D3A8D4F1ADCC1E900335C8C /* OSUser.m in Sources */,
+				3DCCCB0A1AE428F7002A334C /* OSGuestUser.m in Sources */,
 				3D3A8D5C1AE0A73700335C8C /* UIColor+More.m in Sources */,
 				3D3A8D461ADCBC3600335C8C /* OSMeetingRoomViewController.m in Sources */,
 			);

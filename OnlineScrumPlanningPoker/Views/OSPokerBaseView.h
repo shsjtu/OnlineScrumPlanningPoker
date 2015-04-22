@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Constants.h"
+#import "OSConstants.h"
 
 @interface OSPokerBaseView : UIView {
     

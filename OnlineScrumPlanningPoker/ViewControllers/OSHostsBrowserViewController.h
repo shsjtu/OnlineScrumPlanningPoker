@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class OSGuestUser;
 @interface OSHostsBrowserViewController : UIViewController
+@property (strong, nonatomic) OSGuestUser* guestUser;
 
 @end

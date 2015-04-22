@@ -7,7 +7,7 @@
 //
 
 #import "OSPokerBaseView.h"
-#import "Constants.h"
+#import "OSConstants.h"
 #import "UIColor+More.h"
 
 @interface OSPokerBaseView ()
