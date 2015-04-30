@@ -32,4 +32,19 @@ typedef enum OSEstimationSize{
 
 static NSString* kOSEstimationSizeStringSet[] = {@"Reserved",@"XS",@"S",@"M",@"L",@"XL",@"2XL",@"3XL",@"4XL",@"5XL",@"Customize"};
 static NSInteger kOSEstimationSizePointSet[] = {0,1,2,3,5,8,13,21,34,55,-1};
+
+//socket constants
+static const NSInteger kOSSocketHeaderTag = 1;
+static const NSInteger kOSSocketPayloadTag = 2;
+
+#define kOSSocketEventKey @"SocketEventKey"
+#define kOSSocketEventTypeWelcomeGuest @"SocketEventTypeWelcomeGuest"
+#define kOSSocketEventTypeDenyGuest @"SocketEventTypeDenyGuest"
+#define kOSSocketEventTypeGuestVote @"SocketEventTypeGuestVote"
+
+#define kOSSocketNameKey @"SocketNameKey"
+#define kOSSocketVoteKey @"SocketVoteKey"
+
+#define kOSSocketVoteUnknown @"?"
+
 #endif

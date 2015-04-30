@@ -8,8 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol OSUserDelegate;
+@class OSUserRepresentative;
 @interface OSUser : NSObject
 @property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) OSUserRepresentative *selfRepresentative;
+@property (assign) id <OSUserDelegate> delegate;
+
 - (void)startMeeting;
-- (NSString*)hostName;
+- (void)exitMeeting;
+- (NSString*)meetingHostName;
+- (NSInteger)numberOfMembers;
+- (OSUserRepresentative*)memberAtIndex:(NSInteger)index;
+@end
+
+@protocol OSUserDelegate <NSObject>
+- (void)didUpdateUsers;
 @end

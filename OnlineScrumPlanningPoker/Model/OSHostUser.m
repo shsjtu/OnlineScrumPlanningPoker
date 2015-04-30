@@ -9,20 +9,74 @@
 #import "OSHostUser.h"
 #import "GCDAsyncSocket.h"
 #import "OSConstants.h"
+#import "OSSocketReader.h"
+#import "OSSocketWriter.h"
+#import "OSConstants.h"
+#import "OSUserRepresentative.h"
 
-@interface OSHostUser () <NSNetServiceDelegate, GCDAsyncSocketDelegate>
+@interface OSHostUser () <NSNetServiceDelegate, GCDAsyncSocketDelegate, OSSocketReaderDelegate>
 
-@property (strong, nonatomic) NSNetService *publichService;
+@property (strong, nonatomic) NSNetService *publishService;
 @property (strong, nonatomic) GCDAsyncSocket *listenerSocket;
-@property (strong, nonatomic) GCDAsyncSocket *clientSocket;
-
+@property (strong, nonatomic) NSMutableArray *sockets;
+@property (strong, nonatomic) NSMutableDictionary *userMap;
+@property (strong, nonatomic) OSSocketReader* reader;
+@property (strong, nonatomic) OSSocketWriter* writer;
 @end
 
 @implementation OSHostUser
+- (NSInteger)maxCapacity {
+    return 6;
+}
+
+- (instancetype)init {
+    if (self = [super init]) {
+        self.sockets = [[NSMutableArray alloc] initWithCapacity:[self maxCapacity]];
+        self.userMap = [[NSMutableDictionary alloc] initWithCapacity:[self maxCapacity]];
+        self.reader = [[OSSocketReader alloc] init];
+        self.reader.delegate = self;
+        self.writer = [[OSSocketWriter alloc] init];
+    }
+    return self;
+}
 
 - (void)startMeeting {
+    self.selfRepresentative.name = self.name;
+    self.selfRepresentative.status = kOSSocketVoteUnknown;
     [self startBroadcast];
 }
+
+- (void)exitMeeting {
+    [self stopBroadcast];
+}
+
+- (NSString*)meetingHostName {
+    return self.name;
+}
+
+- (NSInteger)numberOfMembers {
+    return self.userMap.count+1;
+}
+
+- (OSUserRepresentative*)memberAtIndex:(NSInteger)index {
+    if(index ==0) {
+        return self.selfRepresentative;
+    }
+    return self.userMap.allValues[index-1];
+}
+
+- (void)welcomeSocket:(GCDAsyncSocket *)sock {
+    [self.writer writeMessage:@{kOSSocketEventKey:kOSSocketEventTypeWelcomeGuest} socket:sock];
+    //Give a tag to a client socket
+    sock.userData = [self serialNumber];
+    [self.reader installSocket:sock];
+}
+
+- (void)denySocket:(GCDAsyncSocket *)sock {
+    [self.writer writeMessage:@{kOSSocketEventKey:kOSSocketEventTypeDenyGuest} socket:sock];
+    [sock disconnectAfterWriting];
+}
+
 - (void)startBroadcast {
     // Initialize GCDAsyncSocket
     self.listenerSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
@@ -30,72 +84,112 @@
     NSError *error = nil;
     if ([self.listenerSocket acceptOnPort:0 error:&error]) {
         // Initialize Service
-        self.publichService = [[NSNetService alloc] initWithDomain:kOSBonjourServiceDomain
+        self.publishService = [[NSNetService alloc] initWithDomain:kOSBonjourServiceDomain
                                                               type:kOSBonjourServiceType
                                                               name:self.name
                                                               port:[self.listenerSocket localPort]];
         // Configure Service
-        [self.publichService setDelegate:self];
+        [self.publishService setDelegate:self];
         // Publish Service
-        [self.publichService publish];
+        [self.publishService publish];
     } else {
         NSLog(@"OSHostUser: Unable to create socket. Error %@ with user info %@.", error, [error userInfo]);
     }
 }
 
-- (void)stopBroadcase {
+- (void)stopBroadcast {
     if (self.listenerSocket) {
+        self.listenerSocket.delegate = nil;
         [self.listenerSocket disconnect];
-        [self.listenerSocket setDelegate:nil];
-        [self setListenerSocket:nil];
+        self.listenerSocket = nil;
     }
-    if (self.publichService) {
-        [self.publichService stop];
-        [self.publichService setDelegate:nil];
-        [self setPublichService:nil];
+    if (self.publishService) {
+        self.publishService.delegate = nil;
+        [self.publishService stop];
+        self.publishService = nil;
     }
 }
 
 - (void)dealloc {
-    [self stopBroadcase];
+    [self stopBroadcast];
 }
 
+- (NSString*)serialNumber {
+    static NSUInteger n = 0;
+    return @(n++).description;
+}
+
+- (void)handleGuestVote:(NSDictionary*)response socket:(GCDAsyncSocket *)sock{
+    NSString* name = response[kOSSocketNameKey];
+    NSString* vote = response[kOSSocketVoteKey];
+    NSAssert(sock.userData!=nil, @"Guest socket has no tag");
+    if(self.userMap[sock.userData] == nil) {
+        self.userMap[sock.userData] = [[OSUserRepresentative alloc] init];
+    }
+    OSUserRepresentative* user = self.userMap[sock.userData];
+    user.name = name;
+    user.status = vote;
+}
+
+- (void)handleGuestResponse:(NSDictionary*)response socket:(GCDAsyncSocket *)sock{
+    NSString* event = response[kOSSocketEventKey];
+    if ([event isEqual:kOSSocketEventTypeGuestVote]) {
+        [self handleGuestVote:response socket:sock];
+    }else {
+        NSLog(@"Host recieved unknown response: %@",response);
+    }
+}
+
+#pragma mark - OSSocketReaderDelegate
+- (void)socket:(GCDAsyncSocket *)sock onMessage:(NSDictionary*)infoDict {
+    if([self.sockets containsObject:sock]) {
+        [self handleGuestResponse:infoDict socket:sock];
+    }
+}
 
 #pragma mark - NSNetServiceDelegate
 - (void)netServiceDidPublish:(NSNetService *)service {
-    
+    //NSLog(@"netServiceDidPublish: [%@:%hu]",[self.listenerSocket localHost], [self.listenerSocket localPort]);
 }
 
 - (void)netService:(NSNetService *)service didNotPublish:(NSDictionary *)errorDict {
-    NSLog(@"Failed to Publish Service: domain(%@) type(%@) name(%@) - %@", [service domain], [service type], [service name], errorDict);
-    if (service == self.publichService) {
-        [self stopBroadcase];
-        [self publichService];
+    NSLog(@"netService (%@) didNotPublish - %@", [service name], errorDict);
+    if (service == self.publishService) {
+        [self stopBroadcast];
+        [self startBroadcast];
     }
 }
 
 #pragma mark - GCDAsyncSocketDelegate
 - (void)socket:(GCDAsyncSocket *)socket didAcceptNewSocket:(GCDAsyncSocket *)newSocket {
-    NSLog(@"Accepted New Socket from %@:%hu", [newSocket connectedHost], [newSocket connectedPort]);
-    
-    // Socket
-    [self setClientSocket:newSocket];
-    
-    // Read Data from Socket
-    [newSocket readDataToLength:sizeof(uint64_t) withTimeout:-1.0 tag:0];
+    //NSLog(@"Accepted New Socket from %@:%hu", [newSocket connectedHost], [newSocket connectedPort]);
+    if(socket == self.listenerSocket) {
+        if(self.sockets.count < [self maxCapacity]) {
+            @synchronized (self){
+                [self.sockets addObject:newSocket];
+            }
+            [self welcomeSocket:newSocket];
+        }else {
+            [self denySocket:newSocket];
+        }
+    }
+}
+
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+    [self.reader socket:sock didReadData:data withTag:tag];
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)socket withError:(NSError *)error {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //NSLog(@"socketDidDisconnect: [%@:%hu]",[self.listenerSocket localHost], [self.listenerSocket localPort]);
     
     if (self.listenerSocket == socket) {
         [self.listenerSocket setDelegate:nil];
         [self setListenerSocket:nil];
     }
     
-    if (self.clientSocket == socket) {
-        [self.clientSocket setDelegate:nil];
-        [self setClientSocket:nil];
+    if ([self.sockets containsObject: socket]) {
+        [socket setDelegate:nil];
+        [self.sockets removeObject:socket];
     }
 }
 @end

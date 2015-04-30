@@ -13,5 +13,5 @@
     
 }
 
-- (OSEstimationSize)size;
+- (OSEstimationSize)point;
 @end

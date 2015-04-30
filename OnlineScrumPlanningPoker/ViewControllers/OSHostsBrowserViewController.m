@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.guestUser setDelegate:self];
+    [self.guestUser setGuestDelegate:self];
     [self.guestUser startBrowsing];
 }
 
@@ -31,6 +31,7 @@
      if([segue.identifier isEqualToString:kOSSegueIdGuestToMeetingRoom]) {
          OSMeetingRoomViewController* meetingController = segue.destinationViewController;
          meetingController.user = self.guestUser;
+         self.guestUser.guestDelegate = nil;
      }
 }
 
@@ -40,7 +41,6 @@
 }
 
 - (void)connectHostSuccess {
-    //[self.navigationController popViewControllerAnimated:NO];
     [self performSegueWithIdentifier:kOSSegueIdGuestToMeetingRoom sender:self];
 }
 

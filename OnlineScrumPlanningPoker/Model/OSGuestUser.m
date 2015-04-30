@@ -9,23 +9,59 @@
 #import "OSGuestUser.h"
 #import "GCDAsyncSocket.h"
 #import "OSConstants.h"
+#import "OSSocketReader.h"
+#import "OSSocketWriter.h"
+#import "OSUserRepresentative.h"
 
-@interface OSGuestUser () <GCDAsyncSocketDelegate, NSNetServiceBrowserDelegate, NSNetServiceDelegate>
+@interface OSGuestUser () <GCDAsyncSocketDelegate, NSNetServiceBrowserDelegate, NSNetServiceDelegate, OSSocketReaderDelegate>
 @property (strong, nonatomic) NSMutableArray *services;
 @property (strong, nonatomic) NSNetServiceBrowser *serviceBrowser;
-@property (strong, nonatomic) GCDAsyncSocket *socket;
+@property (strong, nonatomic) GCDAsyncSocket *hostSocket;
 @property (strong, nonatomic) NSString *hostName;
+@property (strong, nonatomic) OSSocketReader* reader;
+@property (strong, nonatomic) OSSocketWriter* writer;
 
 //methods
 - (void)resolveService:(NSNetService*)service;
 - (BOOL)connectWithService:(NSNetService *)service error:(NSError **)errPtr;
-
+- (void)startBrowsing;
+- (void)stopBrowsing;
+- (void)disconnectHost;
 @end
 
 @implementation OSGuestUser
-- (void)startMeeting {}
+- (instancetype)init {
+    if (self = [super init]) {
+        self.reader = [[OSSocketReader alloc] init];
+        self.reader.delegate = self;
+        self.writer = [[OSSocketWriter alloc] init];
+    }
+    return self;
+}
 
 - (void)dealloc{}
+
+- (void)startMeeting {
+    self.selfRepresentative.name = self.name;
+    self.selfRepresentative.status = kOSSocketVoteUnknown;
+    [self.reader installSocket:self.hostSocket];
+}
+
+- (void)exitMeeting {
+    [self disconnectHost];
+}
+
+- (NSString*)meetingHostName {
+    return self.hostName;
+}
+
+- (NSInteger)numberOfMembers {
+    return 0;
+}
+
+- (OSUserRepresentative*)memberAtIndex:(NSInteger)index {
+    return nil;
+}
 
 - (void)startBrowsing {
     if (self.services) {
@@ -43,8 +79,16 @@
 - (void)stopBrowsing {
     if (self.serviceBrowser) {
         [self.serviceBrowser stop];
-        [self.serviceBrowser setDelegate:nil];
-        [self setServiceBrowser:nil];
+        self.serviceBrowser.delegate = nil;
+        self.serviceBrowser = nil;
+    }
+}
+
+- (void)disconnectHost {
+    if (self.hostSocket) {
+        self.hostSocket.delegate = nil;
+        [self.hostSocket disconnect];
+        self.hostSocket = nil;
     }
 }
 
@@ -81,57 +125,75 @@
     BOOL lConnected = NO;
     // Copy Service Addresses
     NSArray *addresses = [[service addresses] mutableCopy];
-    if(!self.socket || ![self.socket isConnected]) {
+    if(!self.hostSocket || ![self.hostSocket isConnected]) {
         // init socket
-        self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+        self.hostSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
         // connect
         while (!lConnected && [addresses count]) {
             NSData *address = [addresses objectAtIndex:0];
-            if ([self.socket connectToAddress:address error:errPtr]) {
+            if ([self.hostSocket connectToAddress:address error:errPtr]) {
                 lConnected = YES;
             } else if (*errPtr) {
                 NSLog(@"Unable to connect to address. Error %@ with user info %@.", *errPtr, [*errPtr userInfo]);
             }
         }
     }else {
-        lConnected = [self.socket isConnected];
+        lConnected = [self.hostSocket isConnected];
     }
     return lConnected;
 }
 
+- (void)handleHostResponse:(NSDictionary*)response {
+    NSString* event = response[kOSSocketEventKey];
+    if ([event isEqual:kOSSocketEventTypeWelcomeGuest]) {
+        [self commitStatus];
+    }else if ([event isEqual:kOSSocketEventTypeDenyGuest]){
+        NSLog(@"Connection has been denied by host");
+    }else {
+        NSLog(@"Guest recieved unknown response: %@",response);
+    }
+}
+
+- (void)commitStatus {
+    NSString* status = self.selfRepresentative.status;
+    NSDictionary* statusInfo = @{kOSSocketEventKey:kOSSocketEventTypeGuestVote,
+                                 kOSSocketNameKey:self.name,
+                                 kOSSocketVoteKey:status};
+    [self.writer writeMessage:statusInfo socket:self.hostSocket];
+}
+
+#pragma mark - OSSocketReaderDelegate
+- (void)socket:(GCDAsyncSocket *)sock onMessage:(NSDictionary*)infoDict {
+    if(self.hostSocket == sock) {
+        [self handleHostResponse:infoDict];
+    }
+}
+
 #pragma mark - GCDAsyncSocketDelegate
 - (void)socketDidDisconnect:(GCDAsyncSocket *)socket withError:(NSError *)error {
-    if(socket == self.socket){
+    if(socket == self.hostSocket){
         NSLog(@"Socket disconnect: %@.", error);
         [socket setDelegate:nil];
-        [self setSocket:nil];
-        [self.delegate connectHostError:error];
+        [self setHostSocket:nil];
+        [self.guestDelegate connectHostError:error];
     }
 }
 
 - (void)socket:(GCDAsyncSocket *)socket didConnectToHost:(NSString *)host port:(UInt16)port {
-    if(socket == self.socket){
-        [self.delegate connectHostSuccess];
+    if(socket == self.hostSocket){
+        [self.guestDelegate connectHostSuccess];
     }
-    // Start Reading
-    //NSData *term = [@"**/**" dataUsingEncoding:NSUTF8StringEncoding];
-    //[socket readDataToData:term withTimeout:-1 tag:0];
 }
 
-- (void)socket:(GCDAsyncSocket *)socket didReadData:(NSData *)data withTag:(long)tag {
-    //NSString* str = [NSString stringWithUTF8String:data.bytes];
-    //NSLog(@"didReadData: %@",str);
-    // Start Reading
-    //NSData *term = [@"**/**" dataUsingEncoding:NSUTF8StringEncoding];
-    //[socket readDataToData:term withTimeout:-1 tag:0];
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+    [self.reader socket:sock didReadData:data withTag:tag];
 }
-
 
 #pragma mark - NSNetServiceDelegate
 - (void)netService:(NSNetService *)service didNotResolve:(NSDictionary *)errorDict {
     [service setDelegate:nil];
     NSLog(@"Service (%@) didNotResolve: %@", service.name, errorDict);
-    [self.delegate connectHostError:[NSError errorWithDomain: errorDict[NSNetServicesErrorDomain]
+    [self.guestDelegate connectHostError:[NSError errorWithDomain: errorDict[NSNetServicesErrorDomain]
                                                         code: [errorDict[NSNetServicesErrorCode] intValue]
                                                     userInfo: nil]];
 }
@@ -139,9 +201,10 @@
 - (void)netServiceDidResolveAddress:(NSNetService *)service {
     NSError* error = nil;
     if(![self connectWithService:service error:&error]){
-        [self.delegate connectHostError:error];
+        [self.guestDelegate connectHostError:error];
     }
     [service stop];
+    [self stopBrowsing];
 }
 
 #pragma mark - NSNetServiceBrowserDelegate
@@ -153,7 +216,7 @@
     if(!moreComing) {
         // Sort Services
         [self.services sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
-        [self.delegate didUpdateHosts];
+        [self.guestDelegate didUpdateHosts];
     }
 }
 
@@ -163,7 +226,7 @@
         [self.services removeObject:service];
     }
     if(!moreComing) {
-        [self.delegate didUpdateHosts];
+        [self.guestDelegate didUpdateHosts];
     }
 }
 

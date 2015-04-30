@@ -10,7 +10,7 @@
 
 @protocol OSGuestUserDelegate;
 @interface OSGuestUser : OSUser
-@property (assign) id <OSGuestUserDelegate> delegate;
+@property (assign) id <OSGuestUserDelegate> guestDelegate;
 
 /* 
  * Start browsing broadcasted services in network 
