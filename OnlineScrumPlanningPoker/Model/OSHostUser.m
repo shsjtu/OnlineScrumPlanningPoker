@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSNetService *publishService;
 @property (strong, nonatomic) GCDAsyncSocket *listenerSocket;
 @property (strong, nonatomic) NSMutableArray *sockets;
-@property (strong, nonatomic) NSMutableDictionary *userMap;
+//@property (strong, nonatomic) NSMutableDictionary *userMap;
 @property (strong, nonatomic) OSSocketReader* reader;
 @property (strong, nonatomic) OSSocketWriter* writer;
 @end
@@ -32,7 +32,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.sockets = [[NSMutableArray alloc] initWithCapacity:[self maxCapacity]];
-        self.userMap = [[NSMutableDictionary alloc] initWithCapacity:[self maxCapacity]];
+        //self.userMap = [[NSMutableDictionary alloc] initWithCapacity:[self maxCapacity]];
         self.reader = [[OSSocketReader alloc] init];
         self.reader.delegate = self;
         self.writer = [[OSSocketWriter alloc] init];
@@ -55,20 +55,20 @@
 }
 
 - (NSInteger)numberOfMembers {
-    return self.userMap.count+1;
+    return self.sockets.count+1;
 }
 
 - (OSUserRepresentative*)memberAtIndex:(NSInteger)index {
     if(index ==0) {
         return self.selfRepresentative;
     }
-    return self.userMap.allValues[index-1];
+    if(index>self.sockets.count)    return nil;
+    return ((GCDAsyncSocket*)self.sockets[index-1]).userData;
 }
 
 - (void)welcomeSocket:(GCDAsyncSocket *)sock {
+    sock.userData = [[OSUserRepresentative alloc] init];
     [self.writer writeMessage:@{kOSSocketEventKey:kOSSocketEventTypeWelcomeGuest} socket:sock];
-    //Give a tag to a client socket
-    sock.userData = [self serialNumber];
     [self.reader installSocket:sock];
 }
 
@@ -114,21 +114,17 @@
     [self stopBroadcast];
 }
 
-- (NSString*)serialNumber {
-    static NSUInteger n = 0;
-    return @(n++).description;
-}
-
 - (void)handleGuestVote:(NSDictionary*)response socket:(GCDAsyncSocket *)sock{
     NSString* name = response[kOSSocketNameKey];
     NSString* vote = response[kOSSocketVoteKey];
     NSAssert(sock.userData!=nil, @"Guest socket has no tag");
-    if(self.userMap[sock.userData] == nil) {
-        self.userMap[sock.userData] = [[OSUserRepresentative alloc] init];
+    if(sock.userData == nil) {
+        sock.userData = [[OSUserRepresentative alloc] init];
     }
-    OSUserRepresentative* user = self.userMap[sock.userData];
+    OSUserRepresentative* user = sock.userData;
     user.name = name;
     user.status = vote;
+    [self.delegate didUpdateUsers];
 }
 
 - (void)handleGuestResponse:(NSDictionary*)response socket:(GCDAsyncSocket *)sock{
@@ -189,7 +185,12 @@
     
     if ([self.sockets containsObject: socket]) {
         [socket setDelegate:nil];
-        [self.sockets removeObject:socket];
+        [socket setUserData:nil];
+         @synchronized (self){
+             [self.sockets removeObject:socket];
+         }
+        //notify delegate the user status has changed
+        [self.delegate didUpdateUsers];
     }
 }
 @end

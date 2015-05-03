@@ -13,9 +13,10 @@
 
 #define MeetingBoardCellIdentifier @"MeetingBoardCellIdentifier"
 
-@interface OSMeetingRoomViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface OSMeetingRoomViewController () <UITableViewDataSource, UITableViewDelegate, OSUserDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
 @property (weak, nonatomic) IBOutlet OSPokerBaseView *pokerView;
+@property (weak, nonatomic) IBOutlet UITableView* tableView;
 - (BOOL)hostMode;
 @end
 
@@ -26,6 +27,7 @@
     if(self.user.name.length > 0){
         self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome to %@'s meeting",self.user.meetingHostName];
     }
+    [self.user setDelegate:self];
     [self.user startMeeting];
 }
 
@@ -38,6 +40,11 @@
     return [self.user isKindOfClass:[OSHostUser class]];
 }
 
+#pragma mark - OSUserDelegate
+- (void)didUpdateUsers {
+    [self.tableView reloadData];
+}
+
 #pragma mark - UITableViewDataSource / UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.user numberOfMembers];
@@ -48,8 +55,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MeetingBoardCellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MeetingBoardCellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@ : %@", user.name, user.status];
     return cell;

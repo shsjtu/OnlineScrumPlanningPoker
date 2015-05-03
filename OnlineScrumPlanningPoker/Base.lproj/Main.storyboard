@@ -175,6 +175,7 @@
                     <navigationItem key="navigationItem" title="Meeting Room" id="lfB-v2-8rU"/>
                     <connections>
                         <outlet property="pokerView" destination="fug-01-BeM" id="zyP-eO-tMD"/>
+                        <outlet property="tableView" destination="7Et-2o-xar" id="PXI-M3-A3L"/>
                         <outlet property="welcomeLabel" destination="goa-4J-Efd" id="kL1-i8-aNo"/>
                     </connections>
                 </viewController>
