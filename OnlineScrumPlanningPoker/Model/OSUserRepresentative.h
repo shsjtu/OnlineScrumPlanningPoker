@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NSDictionary* OSUserRepresentativeSerializationType;
+
 @interface OSUserRepresentative : NSObject
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *status;
+
+-(OSUserRepresentativeSerializationType)serialized:(BOOL)statusRevealed;
+-(instancetype)initWithDictionary:(OSUserRepresentativeSerializationType)dict;
 
 @end

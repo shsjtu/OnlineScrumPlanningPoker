@@ -26,7 +26,7 @@
         self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:60];
         self.textLabel.textColor = [UIColor logoColor];
         self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.text = kOSEstimationSizeStringSet[self.size];
+        self.textLabel.text = [self pointString];
         //add label
         [self addSubview:self.textLabel];
         //add gesture
@@ -36,12 +36,13 @@
         UISwipeGestureRecognizer *rightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipeRight:)];
         rightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
         [self addGestureRecognizer:rightGestureRecognizer];
+        self.layer.cornerRadius = 5.0f;
     }
     return self;
 }
 
-- (OSEstimationSize)point{
-    return self.size;
+- (NSString*)pointString {
+    return @(kOSEstimationSizePointSet[self.size]).description;
 }
 
 -(void)onSwipeLeft:(UISwipeGestureRecognizer *)recognizer {
@@ -61,7 +62,7 @@
                                 options:UIViewAnimationOptionCurveLinear
                              animations:^(void) {
                                  self.textLabel.alpha = 0.0;
-                                 self.textLabel.text = kOSEstimationSizeStringSet[self.size];
+                                 self.textLabel.text = [self pointString];
                                  self.textLabel.alpha = 1.0;
                              }
                              completion:nil];
@@ -74,7 +75,7 @@
                                 options:UIViewAnimationOptionCurveLinear
                              animations:^(void) {
                                  self.textLabel.alpha = 0.0;
-                                 self.textLabel.text = kOSEstimationSizeStringSet[self.size];
+                                 self.textLabel.text = [self pointString];
                                  self.textLabel.alpha = 1.0;
                              }
                              completion:nil];

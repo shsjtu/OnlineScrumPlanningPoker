@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSString *hostName;
 @property (strong, nonatomic) OSSocketReader* reader;
 @property (strong, nonatomic) OSSocketWriter* writer;
+@property (strong, nonatomic) NSMutableArray* allRepresentatives;
 
 //methods
 - (void)resolveService:(NSNetService*)service;
@@ -35,6 +36,7 @@
         self.reader = [[OSSocketReader alloc] init];
         self.reader.delegate = self;
         self.writer = [[OSSocketWriter alloc] init];
+        self.allRepresentatives = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
 }
@@ -56,11 +58,18 @@
 }
 
 - (NSInteger)numberOfMembers {
-    return 0;
+    return self.allRepresentatives.count;
 }
 
 - (OSUserRepresentative*)memberAtIndex:(NSInteger)index {
-    return nil;
+    if(index>=self.allRepresentatives.count) {  return nil; }
+    return self.allRepresentatives[index];
+}
+
+- (void)vote:(NSString*)voteString {
+    [super vote:voteString];
+    //commit the vote to host
+    [self commitStatus];
 }
 
 - (void)startBrowsing {
@@ -143,12 +152,24 @@
     return lConnected;
 }
 
+- (void)handleHostBroadCast:(NSDictionary*)response {
+    [self.allRepresentatives removeAllObjects];
+    NSArray* allMembers = response[kOSSocketInfoKey];
+    for (OSUserRepresentativeSerializationType memberDict in allMembers) {
+        [self.allRepresentatives addObject:[[OSUserRepresentative alloc] initWithDictionary:memberDict]];
+    }
+    //notify delegate about status update
+    [self.delegate didUpdateUsers];
+}
+
 - (void)handleHostResponse:(NSDictionary*)response {
     NSString* event = response[kOSSocketEventKey];
     if ([event isEqual:kOSSocketEventTypeWelcomeGuest]) {
         [self commitStatus];
     }else if ([event isEqual:kOSSocketEventTypeDenyGuest]){
         NSLog(@"Connection has been denied by host");
+    }else if ([event isEqual:kOSSocketEventTypeHostBroadcast]){
+        [self handleHostBroadCast:response];
     }else {
         NSLog(@"Guest recieved unknown response: %@",response);
     }
@@ -158,7 +179,7 @@
     NSString* status = self.selfRepresentative.status;
     NSDictionary* statusInfo = @{kOSSocketEventKey:kOSSocketEventTypeGuestVote,
                                  kOSSocketNameKey:self.name,
-                                 kOSSocketVoteKey:status};
+                                 kOSSocketInfoKey:status};
     [self.writer writeMessage:statusInfo socket:self.hostSocket];
 }
 

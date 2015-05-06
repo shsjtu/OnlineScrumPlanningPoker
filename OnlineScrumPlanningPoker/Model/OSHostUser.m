@@ -15,11 +15,9 @@
 #import "OSUserRepresentative.h"
 
 @interface OSHostUser () <NSNetServiceDelegate, GCDAsyncSocketDelegate, OSSocketReaderDelegate>
-
 @property (strong, nonatomic) NSNetService *publishService;
 @property (strong, nonatomic) GCDAsyncSocket *listenerSocket;
 @property (strong, nonatomic) NSMutableArray *sockets;
-//@property (strong, nonatomic) NSMutableDictionary *userMap;
 @property (strong, nonatomic) OSSocketReader* reader;
 @property (strong, nonatomic) OSSocketWriter* writer;
 @end
@@ -32,7 +30,6 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.sockets = [[NSMutableArray alloc] initWithCapacity:[self maxCapacity]];
-        //self.userMap = [[NSMutableDictionary alloc] initWithCapacity:[self maxCapacity]];
         self.reader = [[OSSocketReader alloc] init];
         self.reader.delegate = self;
         self.writer = [[OSSocketWriter alloc] init];
@@ -66,6 +63,14 @@
     return ((GCDAsyncSocket*)self.sockets[index-1]).userData;
 }
 
+- (void)vote:(NSString*)voteString {
+    [super vote:voteString];
+    //notify delegate about status update
+    [self.delegate didUpdateUsers];
+    //share the vote (status) with other members
+    [self broadcastMembers:NO];
+}
+
 - (void)welcomeSocket:(GCDAsyncSocket *)sock {
     sock.userData = [[OSUserRepresentative alloc] init];
     [self.writer writeMessage:@{kOSSocketEventKey:kOSSocketEventTypeWelcomeGuest} socket:sock];
@@ -75,6 +80,29 @@
 - (void)denySocket:(GCDAsyncSocket *)sock {
     [self.writer writeMessage:@{kOSSocketEventKey:kOSSocketEventTypeDenyGuest} socket:sock];
     [sock disconnectAfterWriting];
+}
+
+- (void)broadcastMembers:(BOOL)statusRevealed {
+    NSMutableArray* allMembers = [[NSMutableArray alloc] initWithCapacity:self.sockets.count + 1];
+    OSUserRepresentativeSerializationType memberDict = [self.selfRepresentative serialized:statusRevealed];
+    if (memberDict) {
+        [allMembers addObject:memberDict];
+    }
+    for (GCDAsyncSocket* sock in self.sockets) {
+        OSUserRepresentative* member = sock.userData;
+        memberDict = [member serialized:statusRevealed];
+        if (memberDict) {
+            [allMembers addObject:memberDict];
+        }
+    }
+    if (allMembers.count > 0) {
+        NSDictionary* statusInfo = @{kOSSocketEventKey:kOSSocketEventTypeHostBroadcast,
+                                     kOSSocketNameKey:self.name,
+                                     kOSSocketInfoKey:allMembers};
+        for (GCDAsyncSocket* sock in self.sockets) {
+            [self.writer writeMessage:statusInfo socket:sock];
+        }
+    }
 }
 
 - (void)startBroadcast {
@@ -116,7 +144,7 @@
 
 - (void)handleGuestVote:(NSDictionary*)response socket:(GCDAsyncSocket *)sock{
     NSString* name = response[kOSSocketNameKey];
-    NSString* vote = response[kOSSocketVoteKey];
+    NSString* vote = response[kOSSocketInfoKey];
     NSAssert(sock.userData!=nil, @"Guest socket has no tag");
     if(sock.userData == nil) {
         sock.userData = [[OSUserRepresentative alloc] init];
@@ -124,7 +152,10 @@
     OSUserRepresentative* user = sock.userData;
     user.name = name;
     user.status = vote;
+    //notify delegate about status update
     [self.delegate didUpdateUsers];
+    //share the vote (status) with other members
+    [self broadcastMembers:NO];
 }
 
 - (void)handleGuestResponse:(NSDictionary*)response socket:(GCDAsyncSocket *)sock{

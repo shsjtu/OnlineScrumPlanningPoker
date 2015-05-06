@@ -12,6 +12,5 @@
 @interface OSPokerBaseView : UIView {
     
 }
-
-- (OSEstimationSize)point;
+- (NSString*)pointString;
 @end

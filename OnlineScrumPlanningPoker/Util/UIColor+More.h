@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (More)
-+ (UIColor *)logoColor; // 192, 50, 46 RGB 
++ (UIColor *)logoColor; // 192, 50, 46 RGB
++ (UIColor *)colorFromHexString:(NSString *)hexString;
 @end

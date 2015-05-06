@@ -20,6 +20,7 @@
 - (NSString*)meetingHostName;
 - (NSInteger)numberOfMembers;
 - (OSUserRepresentative*)memberAtIndex:(NSInteger)index;
+- (void)vote:(NSString*)voteString;
 @end
 
 @protocol OSUserDelegate <NSObject>

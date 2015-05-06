@@ -40,4 +40,8 @@
     NSAssert(NO, @"Subclasses need to overwrite this method");
     return nil;
 }
+
+- (void)vote:(NSString*)voteString {
+    self.selfRepresentative.status = voteString;
+}
 @end

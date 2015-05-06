@@ -25,6 +25,7 @@
 		3D3D89ED1AA8FC1F00B2FB70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89EC1AA8FC1F00B2FB70 /* Images.xcassets */; };
 		3D3D89F01AA8FC1F00B2FB70 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D89EE1AA8FC1F00B2FB70 /* LaunchScreen.xib */; };
 		3D3D89FC1AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D89FB1AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.m */; };
+		3D3DAC711AF701CF006A7AC6 /* OSMeetingBoardCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3DAC701AF701CF006A7AC6 /* OSMeetingBoardCellTableViewCell.m */; };
 		3DCCCB0A1AE428F7002A334C /* OSGuestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCCCB091AE428F7002A334C /* OSGuestUser.m */; };
 		3DE8AEB81AD775F2002BD7D0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE8AEB71AD775F2002BD7D0 /* SystemConfiguration.framework */; };
 		3DE8AEBB1AD778CA002BD7D0 /* OSNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE8AEBA1AD778CA002BD7D0 /* OSNetworkUtil.m */; };
@@ -79,6 +80,8 @@
 		3D3D89F51AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnlineScrumPlanningPokerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3D89FA1AA8FC1F00B2FB70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D3D89FB1AA8FC1F00B2FB70 /* OnlineScrumPlanningPokerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OnlineScrumPlanningPokerTests.m; sourceTree = "<group>"; };
+		3D3DAC6F1AF701CF006A7AC6 /* OSMeetingBoardCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSMeetingBoardCellTableViewCell.h; sourceTree = "<group>"; };
+		3D3DAC701AF701CF006A7AC6 /* OSMeetingBoardCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSMeetingBoardCellTableViewCell.m; sourceTree = "<group>"; };
 		3DCCCB081AE428F7002A334C /* OSGuestUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSGuestUser.h; sourceTree = "<group>"; };
 		3DCCCB091AE428F7002A334C /* OSGuestUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSGuestUser.m; sourceTree = "<group>"; };
 		3DE8AEB71AD775F2002BD7D0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -147,6 +150,8 @@
 			children = (
 				3D3A8D571AE06FE500335C8C /* OSPokerBaseView.h */,
 				3D3A8D581AE06FE500335C8C /* OSPokerBaseView.m */,
+				3D3DAC6F1AF701CF006A7AC6 /* OSMeetingBoardCellTableViewCell.h */,
+				3D3DAC701AF701CF006A7AC6 /* OSMeetingBoardCellTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -353,6 +358,7 @@
 				3D152C561AEF3DD900FE0B90 /* OSSocketWriter.m in Sources */,
 				3DE8AEC31ADAF673002BD7D0 /* OSHostsBrowserViewController.m in Sources */,
 				3DE8AEC01AD77C7B002BD7D0 /* OSMasterViewController.m in Sources */,
+				3D3DAC711AF701CF006A7AC6 /* OSMeetingBoardCellTableViewCell.m in Sources */,
 				3D152C501AEF253D00FE0B90 /* OSUserRepresentative.m in Sources */,
 				3D152C4D1AEDD25500FE0B90 /* GuestToMeetingRoomSegue.m in Sources */,
 				3D3A8D551ADCC3A300335C8C /* OSGeneric.m in Sources */,
