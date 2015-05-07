@@ -10,86 +10,59 @@
 #import "OSConstants.h"
 #import "UIColor+More.h"
 
-@interface OSPokerBaseView ()
-@property (nonatomic, strong) UILabel* textLabel;
-@property (nonatomic) OSEstimationSize size;
+@interface OSPokerBaseView () <UIPickerViewDataSource, UIPickerViewDelegate>
+//@property (nonatomic, strong) UILabel* textLabel;
+@property (nonatomic, strong) UIPickerView* picker;
+//@property (nonatomic) OSEstimationSize size;
 @end
 
 @implementation OSPokerBaseView
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if(self=[super initWithCoder:aDecoder]){
-        //init size
-        self.size = kOSEstimationSize_M;
-        //init label view
-        self.textLabel = [[UILabel alloc] initWithFrame:self.bounds];
-        self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:60];
-        self.textLabel.textColor = [UIColor logoColor];
-        self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.text = [self pointString];
-        //add label
-        [self addSubview:self.textLabel];
-        //add gesture
-        UISwipeGestureRecognizer *leftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipeLeft:)];
-        leftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-        [self addGestureRecognizer:leftGestureRecognizer];
-        UISwipeGestureRecognizer *rightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipeRight:)];
-        rightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-        [self addGestureRecognizer:rightGestureRecognizer];
+        self.picker = [[UIPickerView alloc] init];
+        self.picker.frame = self.bounds;
+        self.picker.dataSource = self;
+        self.picker.delegate = self;
+        self.picker.showsSelectionIndicator = YES;
+        [self.picker selectRow:(kOSEstimationSize_M-1) inComponent:0 animated:NO];
+        [self addSubview:self.picker];
         self.layer.cornerRadius = 5.0f;
     }
     return self;
 }
 
 - (NSString*)pointString {
-    return @(kOSEstimationSizePointSet[self.size]).description;
+    return kOSEstimationSizePointSet[[self.picker selectedRowInComponent:0]+1];
 }
 
--(void)onSwipeLeft:(UISwipeGestureRecognizer *)recognizer {
-    [self onSwipe:recognizer];
+#pragma mark - UIPickerViewDataSource / UIPickerViewDelegate
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return  1;
 }
 
--(void)onSwipeRight:(UISwipeGestureRecognizer *)recognizer {
-    [self onSwipe:recognizer];
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return kOSEstimationSize_5XL;
 }
 
--(void)onSwipe:(UISwipeGestureRecognizer *)recognizer {
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-        if (self.size < kOSEstimationSize_5XL) {
-            self.size ++;
-            [UIView animateWithDuration:0.5
-                                  delay:0.0
-                                options:UIViewAnimationOptionCurveLinear
-                             animations:^(void) {
-                                 self.textLabel.alpha = 0.0;
-                                 self.textLabel.text = [self pointString];
-                                 self.textLabel.alpha = 1.0;
-                             }
-                             completion:nil];
-        }
-    }else if(recognizer.direction == UISwipeGestureRecognizerDirectionRight) {
-        if (self.size > kOSEstimationSize_XS) {
-            self.size --;
-            [UIView animateWithDuration:0.5
-                                  delay:0.0
-                                options:UIViewAnimationOptionCurveLinear
-                             animations:^(void) {
-                                 self.textLabel.alpha = 0.0;
-                                 self.textLabel.text = [self pointString];
-                                 self.textLabel.alpha = 1.0;
-                             }
-                             completion:nil];
-        }
-    }else {
-        NSLog(@"OSPokerBaseView swipe gesture direction unrecognized: %@",recognizer);
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    return self.bounds.size.width;
+}
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return 36;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel* label = (UILabel*)view;
+    if (!label) {
+        label = [[UILabel alloc] init];
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:32];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor logoColor];
     }
+    label.text = kOSEstimationSizePointSet[row+1];
+    return label;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

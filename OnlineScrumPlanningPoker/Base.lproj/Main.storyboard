@@ -120,37 +120,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Planning Meeting!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goa-4J-Efd">
-                                <rect key="frame" x="31" y="30" width="538" height="18"/>
+                                <rect key="frame" x="21" y="30" width="558" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
                                 <color key="textColor" red="0.69019607839999997" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt; Swipe to change &gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVU-kr-oNy">
-                                <rect key="frame" x="229" y="63" width="142" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fug-01-BeM" customClass="OSPokerBaseView">
-                                <rect key="frame" x="235" y="86" width="130" height="75"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgW-Bo-8U3" userLabel="Divide Line">
+                                <rect key="frame" x="300" y="63" width="1" height="170"/>
+                                <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="Bh5-cn-8Rz"/>
-                                    <constraint firstAttribute="width" constant="130" id="hYG-cJ-XS7"/>
+                                    <constraint firstAttribute="height" constant="170" id="AbT-Cb-cDY"/>
+                                    <constraint firstAttribute="width" constant="1" id="ijn-73-3nI"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqY-LX-qok">
-                                <rect key="frame" x="280" y="176" width="41" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Vote!">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="voteAction:" destination="kiD-TZ-J6P" eventType="touchUpInside" id="bld-AC-jVG"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCx-4i-N31" userLabel="Left Panel">
+                                <rect key="frame" x="16" y="63" width="284" height="170"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fug-01-BeM" customClass="OSPokerBaseView">
+                                        <rect key="frame" x="92" y="4" width="100" height="162"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="162" id="Bh5-cn-8Rz"/>
+                                            <constraint firstAttribute="width" constant="100" id="hYG-cJ-XS7"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="fug-01-BeM" secondAttribute="centerY" id="W5M-1l-dL7"/>
+                                    <constraint firstAttribute="centerX" secondItem="fug-01-BeM" secondAttribute="centerX" id="odS-ks-q2T"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7Et-2o-xar">
-                                <rect key="frame" x="21" y="230" width="568" height="355"/>
+                                <rect key="frame" x="21" y="243" width="568" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MeetingBoardCellIdentifier" id="0Ua-Ib-HEg" customClass="OSMeetingBoardCellTableViewCell">
@@ -205,22 +205,55 @@
                                     <outlet property="delegate" destination="kiD-TZ-J6P" id="TeY-4p-jrL"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7If-de-A9p" userLabel="Right Panel">
+                                <rect key="frame" x="301" y="63" width="283" height="170"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqY-LX-qok">
+                                        <rect key="frame" x="121" y="28" width="41" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Vote!">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="voteAction:" destination="kiD-TZ-J6P" eventType="touchUpInside" id="bld-AC-jVG"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvz-eT-TgI">
+                                        <rect key="frame" x="83" y="68" width="117" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Show all votes">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="IqY-LX-qok" secondAttribute="centerX" id="5cN-UT-IN9"/>
+                                    <constraint firstAttribute="centerX" secondItem="Mvz-eT-TgI" secondAttribute="centerX" id="KMu-cp-fNT"/>
+                                    <constraint firstAttribute="centerY" secondItem="Mvz-eT-TgI" secondAttribute="centerY" id="vvQ-gE-snl"/>
+                                    <constraint firstAttribute="centerY" secondItem="IqY-LX-qok" secondAttribute="centerY" constant="40" id="yZh-eF-m9R"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="fug-01-BeM" secondAttribute="centerX" id="AN8-ec-Azz"/>
+                            <constraint firstAttribute="centerX" secondItem="rgW-Bo-8U3" secondAttribute="centerX" id="8F9-Ob-Ndl"/>
+                            <constraint firstItem="rgW-Bo-8U3" firstAttribute="height" secondItem="7If-de-A9p" secondAttribute="height" id="AaI-wg-t8P"/>
                             <constraint firstItem="goa-4J-Efd" firstAttribute="top" secondItem="MEJ-1B-783" secondAttribute="bottom" constant="10" id="ECO-Qc-wBL"/>
-                            <constraint firstAttribute="centerX" secondItem="IqY-LX-qok" secondAttribute="centerX" id="GDo-d7-St1"/>
-                            <constraint firstItem="fug-01-BeM" firstAttribute="top" secondItem="WVU-kr-oNy" secondAttribute="bottom" constant="5" id="Jmg-dG-wS8"/>
-                            <constraint firstItem="IqY-LX-qok" firstAttribute="top" secondItem="fug-01-BeM" secondAttribute="bottom" constant="15" id="OfY-y4-wSL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7If-de-A9p" secondAttribute="trailing" id="HxP-D7-Iee"/>
+                            <constraint firstItem="rgW-Bo-8U3" firstAttribute="top" secondItem="nCx-4i-N31" secondAttribute="top" id="IL0-mu-kqb"/>
+                            <constraint firstItem="rgW-Bo-8U3" firstAttribute="top" secondItem="goa-4J-Efd" secondAttribute="bottom" constant="15" id="MXu-x7-nUr"/>
                             <constraint firstItem="7Et-2o-xar" firstAttribute="trailing" secondItem="Dei-Oo-htL" secondAttribute="trailingMargin" constant="5" id="Qa0-cM-AHr"/>
                             <constraint firstItem="7Et-2o-xar" firstAttribute="leading" secondItem="Dei-Oo-htL" secondAttribute="leadingMargin" constant="5" id="TcW-eZ-HKA"/>
-                            <constraint firstAttribute="centerX" secondItem="WVU-kr-oNy" secondAttribute="centerX" id="eTc-Sw-lvJ"/>
-                            <constraint firstItem="goa-4J-Efd" firstAttribute="leading" secondItem="Dei-Oo-htL" secondAttribute="leadingMargin" constant="15" id="fTz-LK-89L"/>
-                            <constraint firstItem="WVU-kr-oNy" firstAttribute="top" secondItem="goa-4J-Efd" secondAttribute="bottom" constant="15" id="nIe-X0-sof"/>
+                            <constraint firstItem="rgW-Bo-8U3" firstAttribute="height" secondItem="nCx-4i-N31" secondAttribute="height" id="Tml-Xb-uQg"/>
+                            <constraint firstItem="nCx-4i-N31" firstAttribute="leading" secondItem="Dei-Oo-htL" secondAttribute="leadingMargin" id="UgE-ew-0DU"/>
+                            <constraint firstItem="rgW-Bo-8U3" firstAttribute="top" secondItem="7If-de-A9p" secondAttribute="top" id="XHE-FV-FkB"/>
+                            <constraint firstItem="7Et-2o-xar" firstAttribute="top" secondItem="rgW-Bo-8U3" secondAttribute="bottom" constant="10" id="cUy-bP-TbS"/>
+                            <constraint firstItem="goa-4J-Efd" firstAttribute="leading" secondItem="Dei-Oo-htL" secondAttribute="leadingMargin" constant="5" id="fTz-LK-89L"/>
+                            <constraint firstItem="7If-de-A9p" firstAttribute="leading" secondItem="rgW-Bo-8U3" secondAttribute="trailing" id="gJl-uJ-Ydb"/>
+                            <constraint firstItem="rgW-Bo-8U3" firstAttribute="leading" secondItem="nCx-4i-N31" secondAttribute="trailing" id="ntg-b9-TDK"/>
                             <constraint firstItem="qts-3f-Mb2" firstAttribute="top" secondItem="7Et-2o-xar" secondAttribute="bottom" constant="15" id="qSm-nd-Lj7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="goa-4J-Efd" secondAttribute="trailing" constant="15" id="ugM-5M-Igw"/>
-                            <constraint firstItem="7Et-2o-xar" firstAttribute="top" secondItem="IqY-LX-qok" secondAttribute="bottom" constant="20" id="w2E-c6-wad"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="goa-4J-Efd" secondAttribute="trailing" constant="5" id="ugM-5M-Igw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Meeting Room" id="lfB-v2-8rU"/>
