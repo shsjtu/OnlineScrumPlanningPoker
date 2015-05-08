@@ -29,6 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadUserDefaults];
     NSString* ssid = [OSNetworkUtil wifiSSID];
     if(ssid) {
         self.currentNetworkLabel.text = [NSString stringWithFormat:@"My WIFI: \"%@\"", ssid];
@@ -42,14 +43,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)loadUserDefaults {
+    NSString* defaultsUserName = [[NSUserDefaults standardUserDefaults] objectForKey:kOSAppDefaultsUserNameKey];
+    if (defaultsUserName) {
+        self.nameInput.text = defaultsUserName;
+    }
+}
+
+- (void)saveDefaultsUserName {
+    [[NSUserDefaults standardUserDefaults] setObject:self.nameInput.text forKey:kOSAppDefaultsUserNameKey];
+}
+
 - (void)hostAction {
     if([self readyForMeeting]) {
+        [self saveDefaultsUserName];
         [self performSegueWithIdentifier:kOSSegueIdHostToMeetingRoom sender:self];
     }
 }
 
 - (void)joinAction {
     if([self readyForMeeting]) {
+        [self saveDefaultsUserName];
         [self performSegueWithIdentifier:kOSSegueIdMasterToHostsBrowser sender:self];
     }
 }
@@ -60,6 +74,8 @@
 }
 
 - (BOOL)readyForMeeting {
+    //trim string
+    self.nameInput.text = [self.nameInput.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.nameInput.text.length == 0) {
         [OSGeneric displayError:@"Please enter your name" fromViewController:self];
         return NO;

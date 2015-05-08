@@ -20,9 +20,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
 @property (weak, nonatomic) IBOutlet OSPokerBaseView *pokerView;
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
+
+@property (weak, nonatomic) IBOutlet UIButton* voteButton;
+@property (weak, nonatomic) IBOutlet UIButton* showAllButton;
 - (UIColor *)nameLabelColor:(NSIndexPath*)indexPath;
 - (UIColor *)statusLabelColor:(NSIndexPath*)indexPath;
-- (BOOL)hostMode;
 @end
 
 @implementation OSMeetingRoomViewController
@@ -31,6 +33,8 @@
     [super viewDidLoad];
     self.navigationItem.title = [NSString stringWithFormat:@"%@'s Meeting",self.user.meetingHostName];
     self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome, %@", self.user.name];
+    self.showAllButton.hidden = ![self.user isHost];
+    self.showAllButton.enabled = NO;
     [self.user setDelegate:self];
     [self.user startMeeting];
 }
@@ -38,10 +42,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.user exitMeeting];
-}
-
-- (BOOL)hostMode {
-    return [self.user isKindOfClass:[OSHostUser class]];
 }
 
 - (UIColor *)nameLabelColor:(NSIndexPath*)indexPath {
@@ -71,12 +71,23 @@
 }
 
 - (IBAction)voteAction:(id)sender {
+    self.voteButton.enabled = NO;
+    [self.voteButton setTitle:@"Voted" forState:UIControlStateNormal];
     [self.user vote:[self.pokerView pointString]];
 }
 
+- (IBAction)showAllAction:(id)sender {
+    if ([self.user isHost]) {
+        [(OSHostUser*)self.user revealAllVotes];
+    }
+}
+
 #pragma mark - OSUserDelegate
-- (void)didUpdateUsers {
+- (void)didUpdateUsers:(BOOL)readyToReveal{
     [self.tableView reloadData];
+    if([self.user isHost]) {
+        self.showAllButton.enabled = readyToReveal;
+    }
 }
 
 #pragma mark - UITableViewDataSource / UITableViewDelegate

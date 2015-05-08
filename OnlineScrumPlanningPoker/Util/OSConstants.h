@@ -37,6 +37,9 @@ static NSString* kOSEstimationSizePointSet[] = {@"0",@"1",@"2",@"3",@"5",@"8",@"
 static const NSInteger kOSSocketHeaderTag = 1;
 static const NSInteger kOSSocketPayloadTag = 2;
 
+#define kOSSocketVersionKey @"SocketVersionKey"
+#define kOSSocketCurrentVersion @"1.0.0"
+
 #define kOSSocketEventKey @"SocketEventKey"
 #define kOSSocketEventTypeWelcomeGuest @"SocketEventTypeWelcomeGuest"
 #define kOSSocketEventTypeDenyGuest @"SocketEventTypeDenyGuest"
@@ -48,5 +51,8 @@ static const NSInteger kOSSocketPayloadTag = 2;
 
 #define kOSSocketVoteUnknown @"?"
 #define kOSSocketVoteTBR @"√"
+
+#define kOSAppDefaultsUserNameKey @"OSAppDefaultsUserNameKey"
+#define kOSAppDefaultsVersionKey @"OSAppDefaultsVersionKey"
 
 #endif

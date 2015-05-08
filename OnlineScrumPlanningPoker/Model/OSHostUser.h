@@ -9,5 +9,8 @@
 #import "OSUser.h"
 
 @interface OSHostUser : OSUser
-
+/*
+ * Reveal all members' votes
+ */
+- (void)revealAllVotes;
 @end

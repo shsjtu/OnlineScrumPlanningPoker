@@ -21,8 +21,9 @@
 - (NSInteger)numberOfMembers;
 - (OSUserRepresentative*)memberAtIndex:(NSInteger)index;
 - (void)vote:(NSString*)voteString;
+- (BOOL)isHost;
 @end
 
 @protocol OSUserDelegate <NSObject>
-- (void)didUpdateUsers;
+- (void)didUpdateUsers:(BOOL)readyToReveal;
 @end

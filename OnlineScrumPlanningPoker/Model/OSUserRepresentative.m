@@ -14,20 +14,40 @@
 @end
 
 @implementation OSUserRepresentative
--(OSUserRepresentativeSerializationType)serialized:(BOOL)statusRevealed {
-    if(self.name.length == 0 || self.status.length == 0) {
-        return nil;
+- (instancetype)init {
+    if(self = [super init]) {
+        self.revealed = NO;
     }
-    if ([self.status isEqual:kOSSocketVoteUnknown]){
-        return @{self.name:self.status};
-    }
-    if (statusRevealed) {
-        return @{self.name:self.status};
-    }
-    //return "status to be revealed"
-    return @{self.name:kOSSocketVoteTBR};
+    return self;
 }
 
+-(OSUserRepresentativeSerializationType)serialized {
+    if(_name.length == 0 || _status.length == 0) {
+        return nil;
+    }
+    return @{self.name:self.status};
+}
+
+-(NSString*)status {
+    if (_status.length == 0) {
+        return nil;
+    }
+    if ([_status isEqual:kOSSocketVoteUnknown]){
+        return _status;
+    }
+    if (self.revealed) {
+        return _status;
+    }
+    //return "status to be revealed"
+    return kOSSocketVoteTBR;
+}
+
+-(BOOL)voted {
+    if (_status.length == 0) {
+        return NO;
+    }
+    return ![_status isEqual:kOSSocketVoteUnknown];
+}
 
 -(instancetype)initWithDictionary:(OSUserRepresentativeSerializationType)dict {
     if (self = [super init]) {

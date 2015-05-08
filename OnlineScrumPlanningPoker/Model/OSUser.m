@@ -44,4 +44,9 @@
 - (void)vote:(NSString*)voteString {
     self.selfRepresentative.status = voteString;
 }
+
+- (BOOL)isHost {
+    NSAssert(NO, @"Subclasses need to overwrite this method");
+    return NO;
+}
 @end

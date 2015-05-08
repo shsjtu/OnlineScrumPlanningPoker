@@ -13,8 +13,9 @@ typedef NSDictionary* OSUserRepresentativeSerializationType;
 @interface OSUserRepresentative : NSObject
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *status;
+@property (nonatomic) BOOL revealed;
 
--(OSUserRepresentativeSerializationType)serialized:(BOOL)statusRevealed;
+-(OSUserRepresentativeSerializationType)serialized;
 -(instancetype)initWithDictionary:(OSUserRepresentativeSerializationType)dict;
-
+-(BOOL)voted;
 @end

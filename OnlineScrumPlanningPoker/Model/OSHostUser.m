@@ -66,9 +66,31 @@
 - (void)vote:(NSString*)voteString {
     [super vote:voteString];
     //notify delegate about status update
-    [self.delegate didUpdateUsers];
+    [self.delegate didUpdateUsers:[self allVoted]];
     //share the vote (status) with other members
     [self broadcastMembers:NO];
+}
+
+- (BOOL)isHost {
+    return YES;
+}
+
+- (BOOL)allVoted {
+    BOOL notVoted = NO;
+    notVoted = ![self.selfRepresentative voted];
+    if (!notVoted) {
+        for (GCDAsyncSocket* sock in self.sockets) {
+            notVoted = ![(OSUserRepresentative*)sock.userData voted];
+            if(notVoted)    break;
+        }
+    }
+    return !notVoted;
+}
+
+- (void)revealAllVotes {
+    [self broadcastMembers:YES];
+    //notify delegate about status update
+    [self.delegate didUpdateUsers:[self allVoted]];
 }
 
 - (void)welcomeSocket:(GCDAsyncSocket *)sock {
@@ -84,13 +106,15 @@
 
 - (void)broadcastMembers:(BOOL)statusRevealed {
     NSMutableArray* allMembers = [[NSMutableArray alloc] initWithCapacity:self.sockets.count + 1];
-    OSUserRepresentativeSerializationType memberDict = [self.selfRepresentative serialized:statusRevealed];
+    self.selfRepresentative.revealed = statusRevealed;
+    OSUserRepresentativeSerializationType memberDict = [self.selfRepresentative serialized];
     if (memberDict) {
         [allMembers addObject:memberDict];
     }
     for (GCDAsyncSocket* sock in self.sockets) {
         OSUserRepresentative* member = sock.userData;
-        memberDict = [member serialized:statusRevealed];
+        member.revealed = statusRevealed;
+        memberDict = [member serialized];
         if (memberDict) {
             [allMembers addObject:memberDict];
         }
@@ -146,14 +170,11 @@
     NSString* name = response[kOSSocketNameKey];
     NSString* vote = response[kOSSocketInfoKey];
     NSAssert(sock.userData!=nil, @"Guest socket has no tag");
-    if(sock.userData == nil) {
-        sock.userData = [[OSUserRepresentative alloc] init];
-    }
     OSUserRepresentative* user = sock.userData;
     user.name = name;
     user.status = vote;
     //notify delegate about status update
-    [self.delegate didUpdateUsers];
+    [self.delegate didUpdateUsers:[self allVoted]];
     //share the vote (status) with other members
     [self broadcastMembers:NO];
 }
@@ -221,7 +242,7 @@
              [self.sockets removeObject:socket];
          }
         //notify delegate the user status has changed
-        [self.delegate didUpdateUsers];
+        [self.delegate didUpdateUsers:[self allVoted]];
     }
 }
 @end

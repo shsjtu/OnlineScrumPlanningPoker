@@ -72,6 +72,10 @@
     [self commitStatus];
 }
 
+- (BOOL)isHost {
+    return NO;
+}
+
 - (void)startBrowsing {
     if (self.services) {
         [self.services removeAllObjects];
@@ -156,10 +160,12 @@
     [self.allRepresentatives removeAllObjects];
     NSArray* allMembers = response[kOSSocketInfoKey];
     for (OSUserRepresentativeSerializationType memberDict in allMembers) {
-        [self.allRepresentatives addObject:[[OSUserRepresentative alloc] initWithDictionary:memberDict]];
+        OSUserRepresentative* member = [[OSUserRepresentative alloc] initWithDictionary:memberDict];
+        member.revealed = YES;
+        [self.allRepresentatives addObject:member];
     }
     //notify delegate about status update
-    [self.delegate didUpdateUsers];
+    [self.delegate didUpdateUsers:NO];
 }
 
 - (void)handleHostResponse:(NSDictionary*)response {

@@ -218,12 +218,15 @@
                                             <action selector="voteAction:" destination="kiD-TZ-J6P" eventType="touchUpInside" id="bld-AC-jVG"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvz-eT-TgI">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvz-eT-TgI">
                                         <rect key="frame" x="83" y="68" width="117" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Show all votes">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="showAllAction:" destination="kiD-TZ-J6P" eventType="touchUpInside" id="x3V-bl-Ayq"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -259,7 +262,9 @@
                     <navigationItem key="navigationItem" title="Meeting Room" id="lfB-v2-8rU"/>
                     <connections>
                         <outlet property="pokerView" destination="fug-01-BeM" id="zyP-eO-tMD"/>
+                        <outlet property="showAllButton" destination="Mvz-eT-TgI" id="pua-IE-7kV"/>
                         <outlet property="tableView" destination="7Et-2o-xar" id="PXI-M3-A3L"/>
+                        <outlet property="voteButton" destination="IqY-LX-qok" id="OeO-KE-mql"/>
                         <outlet property="welcomeLabel" destination="goa-4J-Efd" id="kL1-i8-aNo"/>
                     </connections>
                 </viewController>

@@ -11,4 +11,7 @@
 
 @interface OSGeneric : NSObject
 + (void)displayError:(NSString*)message fromViewController:(UIViewController*)viewController;
++ (BOOL)newerVersion:(NSString*)version;
++ (BOOL)elderVersion:(NSString*)version;
++ (BOOL)sameVersion:(NSString*)version;
 @end

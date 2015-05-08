@@ -27,7 +27,9 @@
 
 - (void)writeMessage:(NSDictionary *)info socket:(GCDAsyncSocket *)sock {
     if(info) {
-        NSData* data = [self codeMessage:info];
+        NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithDictionary:info];
+        [payload setObject:kOSSocketCurrentVersion forKey:kOSSocketVersionKey];
+        NSData* data = [self codeMessage:payload];
         if (data) {
             [sock writeData:[self codeLength:(int64_t)data.length] withTimeout:-1 tag:kOSSocketHeaderTag];
             [sock writeData:data withTimeout:-1 tag:kOSSocketPayloadTag];

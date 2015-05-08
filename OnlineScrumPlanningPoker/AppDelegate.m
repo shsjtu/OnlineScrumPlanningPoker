@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "OSConstants.h"
+#import "OSGeneric.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    NSString* defaultsVersion = [[NSUserDefaults standardUserDefaults] objectForKey:kOSAppDefaultsVersionKey];
+    if(defaultsVersion) {
+        if([OSGeneric elderVersion:defaultsVersion]) {
+            //Upgrade from elder version. Clear all defaults
+            NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+            [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:kOSSocketCurrentVersion forKey:kOSAppDefaultsVersionKey];
     return YES;
 }
 

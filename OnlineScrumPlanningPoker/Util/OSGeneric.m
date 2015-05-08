@@ -7,6 +7,7 @@
 //
 
 #import "OSGeneric.h"
+#import "OSConstants.h"
 
 @implementation OSGeneric
 + (void)displayError:(NSString*)message fromViewController:(UIViewController*)viewController{
@@ -18,5 +19,21 @@
                                                      handler:nil];
     [alertController addAction:okAction];
     [viewController presentViewController:alertController animated:YES completion:nil];
+}
+
++ (NSComparisonResult)compareVersion:(NSString*)version {
+    return [kOSSocketCurrentVersion compare:version options:NSNumericSearch];
+}
+
++ (BOOL)newerVersion:(NSString*)version {
+    return [OSGeneric compareVersion:version] == NSOrderedAscending;
+}
+
++ (BOOL)elderVersion:(NSString*)version {
+    return [OSGeneric compareVersion:version] == NSOrderedDescending;
+}
+
++ (BOOL)sameVersion:(NSString*)version {
+    return [OSGeneric compareVersion:version] == NSOrderedSame;
 }
 @end
