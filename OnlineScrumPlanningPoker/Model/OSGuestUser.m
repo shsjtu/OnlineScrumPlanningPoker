@@ -46,6 +46,7 @@
 - (void)startMeeting {
     self.selfRepresentative.name = self.name;
     self.selfRepresentative.status = kOSSocketVoteUnknown;
+    self.selfRepresentative.revealed = YES;
     [self.reader installSocket:self.hostSocket];
 }
 
