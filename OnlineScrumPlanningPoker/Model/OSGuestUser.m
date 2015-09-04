@@ -166,7 +166,16 @@
         [self.allRepresentatives addObject:member];
     }
     //notify delegate about status update
-    [self.delegate didUpdateUsers:NO];
+    [self.delegate didUpdateUsers:[self allVotesRevealed]];
+}
+
+- (BOOL)allVotesRevealed {
+    BOOL notRevealed = NO;
+    for (OSUserRepresentative* member in self.allRepresentatives) {
+        notRevealed = ![member voteRevealed];
+        if(notRevealed)    break;
+    }
+    return !notRevealed;
 }
 
 - (void)handleHostResponse:(NSDictionary*)response {

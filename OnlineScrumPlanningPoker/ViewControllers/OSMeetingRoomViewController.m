@@ -7,16 +7,18 @@
 //
 
 #import "OSMeetingRoomViewController.h"
+#import "OSGuestUser.h"
 #import "OSHostUser.h"
 #import "OSPokerBaseView.h"
 #import "OSUserRepresentative.h"
 #import "OSMeetingBoardCellTableViewCell.h"
 #import "UIColor+More.h"
+#import "OSGeneric.h"
 
 #define MeetingBoardCellIdentifier @"MeetingBoardCellIdentifier"
 #define kColorSchemaNumber 5
 
-@interface OSMeetingRoomViewController () <UITableViewDataSource, UITableViewDelegate, OSUserDelegate>
+@interface OSMeetingRoomViewController () <UITableViewDataSource, UITableViewDelegate, OSUserDelegate, OSGuestUserDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
 @property (weak, nonatomic) IBOutlet OSPokerBaseView *pokerView;
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
@@ -32,10 +34,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = [NSString stringWithFormat:@"%@'s Meeting",self.user.meetingHostName];
-    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome, %@", self.user.name];
+    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome, %@. Please vote", self.user.name];
     self.showAllButton.hidden = ![self.user isHost];
     self.showAllButton.enabled = NO;
     [self.user setDelegate:self];
+    if (![self.user isHost]) {
+        [((OSGuestUser*)self.user) setGuestDelegate:self];
+    }
     [self.user startMeeting];
 }
 
@@ -74,6 +79,11 @@
     self.voteButton.enabled = NO;
     [self.voteButton setTitle:@"Voted" forState:UIControlStateNormal];
     [self.user vote:[self.pokerView pointString]];
+    if ([self.user isHost]) {
+       
+    } else {
+        self.welcomeLabel.text = [NSString stringWithFormat:@"Just voted. Awaiting the reveal"];
+    }
 }
 
 - (IBAction)showAllAction:(id)sender {
@@ -86,7 +96,33 @@
 - (void)didUpdateUsers:(BOOL)readyToReveal{
     [self.tableView reloadData];
     if([self.user isHost]) {
+        if (readyToReveal) {
+            self.welcomeLabel.text = [NSString stringWithFormat:@"All voted. Please show all votes"];
+        } else {
+            self.welcomeLabel.text = [NSString stringWithFormat:@"Awaiting for all votes"];
+        }
         self.showAllButton.enabled = readyToReveal;
+    }else {
+        if (readyToReveal) {
+             self.welcomeLabel.text = [NSString stringWithFormat:@"Check out the result!"];
+        }
+    }
+}
+
+#pragma mark - OSGuestUserDelegate
+- (void)didUpdateHosts {
+    
+}
+- (void)connectHostSuccess {
+    
+}
+- (void)connectHostError:(NSError*)error {
+    if (![self.user isHost]) {
+        [OSGeneric displayError:@"Host has closed the meeting"
+             fromViewController:self
+                        handler:^(UIAlertAction *action){
+                            [self.navigationController popViewControllerAnimated:YES];
+        }];
     }
 }
 

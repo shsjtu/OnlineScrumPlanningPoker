@@ -10,6 +10,9 @@
 #import <UIKit/UIKit.h>
 
 @interface OSGeneric : NSObject
++ (void)displayError:(NSString*)message
+  fromViewController:(UIViewController*)viewController
+             handler:(void (^)(UIAlertAction *action))handler;
 + (void)displayError:(NSString*)message fromViewController:(UIViewController*)viewController;
 + (BOOL)newerVersion:(NSString*)version;
 + (BOOL)elderVersion:(NSString*)version;

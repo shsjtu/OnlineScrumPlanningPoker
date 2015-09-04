@@ -49,6 +49,13 @@
     return ![_status isEqual:kOSSocketVoteUnknown];
 }
 
+-(BOOL)voteRevealed{
+    if (_status.length == 0) {
+        return NO;
+    }
+    return ![_status isEqual:kOSSocketVoteUnknown] && ![_status isEqual:kOSSocketVoteTBR];
+}
+
 -(instancetype)initWithDictionary:(OSUserRepresentativeSerializationType)dict {
     if (self = [super init]) {
         self.name = dict.allKeys.firstObject;
