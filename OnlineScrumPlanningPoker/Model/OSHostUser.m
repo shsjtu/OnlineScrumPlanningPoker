@@ -87,6 +87,18 @@
     return !notVoted;
 }
 
+- (BOOL)allRevealed {
+    BOOL notRevealed = NO;
+    notRevealed = !self.selfRepresentative.revealed;
+    if (!notRevealed) {
+        for (GCDAsyncSocket* sock in self.sockets) {
+            notRevealed = ![(OSUserRepresentative*)sock.userData revealed];
+            if(notRevealed)    break;
+        }
+    }
+    return !notRevealed;
+}
+
 - (void)revealAllVotes {
     [self broadcastMembers:YES];
     //notify delegate about status update

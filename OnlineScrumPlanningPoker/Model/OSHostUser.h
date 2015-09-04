@@ -15,7 +15,12 @@
 - (void)revealAllVotes;
 
 /*
- * restart the meeting and reset all users' votes
+ * Restart the meeting and reset all users' votes
  */
 - (void)restartMeeting;
+
+/*
+ * If everyone in the room has voted
+ */
+- (BOOL)allRevealed;
 @end
