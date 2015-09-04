@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eC7-8o-F1V">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eC7-8o-F1V">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -209,8 +209,8 @@
                                 <rect key="frame" x="301" y="63" width="283" height="170"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqY-LX-qok">
-                                        <rect key="frame" x="121" y="28" width="41" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <rect key="frame" x="121" y="29" width="41" height="33"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <state key="normal" title="Vote!">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -219,8 +219,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvz-eT-TgI">
-                                        <rect key="frame" x="83" y="68" width="117" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <rect key="frame" x="83" y="69" width="117" height="33"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <state key="normal" title="Show all votes">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -228,10 +228,22 @@
                                             <action selector="showAllAction:" destination="kiD-TZ-J6P" eventType="touchUpInside" id="x3V-bl-Ayq"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7q-7n-yuK">
+                                        <rect key="frame" x="77" y="114" width="129" height="33"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="Restart Meeting">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="restartAction:" destination="kiD-TZ-J6P" eventType="touchUpInside" id="c50-sc-OpV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="IqY-LX-qok" secondAttribute="centerX" id="5cN-UT-IN9"/>
+                                    <constraint firstAttribute="bottom" secondItem="n7q-7n-yuK" secondAttribute="bottom" constant="23" id="Ftt-VJ-DJb"/>
+                                    <constraint firstAttribute="centerX" secondItem="n7q-7n-yuK" secondAttribute="centerX" id="K8R-NR-bZS"/>
                                     <constraint firstAttribute="centerX" secondItem="Mvz-eT-TgI" secondAttribute="centerX" id="KMu-cp-fNT"/>
                                     <constraint firstAttribute="centerY" secondItem="Mvz-eT-TgI" secondAttribute="centerY" id="vvQ-gE-snl"/>
                                     <constraint firstAttribute="centerY" secondItem="IqY-LX-qok" secondAttribute="centerY" constant="40" id="yZh-eF-m9R"/>
@@ -262,6 +274,7 @@
                     <navigationItem key="navigationItem" title="Meeting Room" id="lfB-v2-8rU"/>
                     <connections>
                         <outlet property="pokerView" destination="fug-01-BeM" id="zyP-eO-tMD"/>
+                        <outlet property="restartButton" destination="n7q-7n-yuK" id="zpg-6v-igG"/>
                         <outlet property="showAllButton" destination="Mvz-eT-TgI" id="pua-IE-7kV"/>
                         <outlet property="tableView" destination="7Et-2o-xar" id="PXI-M3-A3L"/>
                         <outlet property="voteButton" destination="IqY-LX-qok" id="OeO-KE-mql"/>

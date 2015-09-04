@@ -182,10 +182,14 @@
     NSString* event = response[kOSSocketEventKey];
     if ([event isEqual:kOSSocketEventTypeWelcomeGuest]) {
         [self commitStatus];
-    }else if ([event isEqual:kOSSocketEventTypeDenyGuest]){
+    }else if ([event isEqual:kOSSocketEventTypeDenyGuest]) {
         NSLog(@"Connection has been denied by host");
-    }else if ([event isEqual:kOSSocketEventTypeHostBroadcast]){
+    }else if ([event isEqual:kOSSocketEventTypeHostBroadcast]) {
         [self handleHostBroadCast:response];
+    }else if ([event isEqual:kOSSocketEventTypeHostRestart]) {
+        [self.selfRepresentative reset];
+        self.selfRepresentative.revealed = YES;
+        [self.delegate userReset];
     }else {
         NSLog(@"Guest recieved unknown response: %@",response);
     }

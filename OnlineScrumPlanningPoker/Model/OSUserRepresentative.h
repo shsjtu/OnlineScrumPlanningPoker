@@ -19,4 +19,5 @@ typedef NSDictionary* OSUserRepresentativeSerializationType;
 -(instancetype)initWithDictionary:(OSUserRepresentativeSerializationType)dict;
 -(BOOL)voted;
 -(BOOL)voteRevealed;
+-(void)reset;
 @end

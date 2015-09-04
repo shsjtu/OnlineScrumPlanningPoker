@@ -26,4 +26,5 @@
 
 @protocol OSUserDelegate <NSObject>
 - (void)didUpdateUsers:(BOOL)readyToReveal;
+- (void)userReset;
 @end

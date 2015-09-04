@@ -56,6 +56,11 @@
     return ![_status isEqual:kOSSocketVoteUnknown] && ![_status isEqual:kOSSocketVoteTBR];
 }
 
+-(void)reset {
+    self.status = kOSSocketVoteUnknown;
+    self.revealed = NO;
+}
+
 -(instancetype)initWithDictionary:(OSUserRepresentativeSerializationType)dict {
     if (self = [super init]) {
         self.name = dict.allKeys.firstObject;

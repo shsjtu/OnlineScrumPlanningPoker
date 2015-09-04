@@ -25,6 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton* voteButton;
 @property (weak, nonatomic) IBOutlet UIButton* showAllButton;
+@property (weak, nonatomic) IBOutlet UIButton* restartButton;
 - (UIColor *)nameLabelColor:(NSIndexPath*)indexPath;
 - (UIColor *)statusLabelColor:(NSIndexPath*)indexPath;
 @end
@@ -36,6 +37,7 @@
     self.navigationItem.title = [NSString stringWithFormat:@"%@'s Meeting",self.user.meetingHostName];
     self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome, %@. Please vote", self.user.name];
     self.showAllButton.hidden = ![self.user isHost];
+    self.restartButton.hidden = ![self.user isHost];
     self.showAllButton.enabled = NO;
     [self.user setDelegate:self];
     if (![self.user isHost]) {
@@ -92,6 +94,12 @@
     }
 }
 
+- (IBAction)restartAction:(id)sender {
+    if ([self.user isHost]) {
+        [(OSHostUser*)self.user restartMeeting];
+    }
+}
+
 #pragma mark - OSUserDelegate
 - (void)didUpdateUsers:(BOOL)readyToReveal{
     [self.tableView reloadData];
@@ -107,6 +115,10 @@
              self.welcomeLabel.text = [NSString stringWithFormat:@"Check out the result!"];
         }
     }
+}
+
+- (void)userReset {
+    self.voteButton.enabled = YES;
 }
 
 #pragma mark - OSGuestUserDelegate

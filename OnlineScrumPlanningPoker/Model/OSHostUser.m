@@ -93,6 +93,22 @@
     [self.delegate didUpdateUsers:[self allVoted]];
 }
 
+- (void)restartMeeting {
+    //inform members to reset status
+    for (GCDAsyncSocket* sock in self.sockets) {
+        OSUserRepresentative* member = sock.userData;
+        [member reset];
+        [self.writer writeMessage:@{kOSSocketEventKey:kOSSocketEventTypeHostRestart} socket:sock];
+    }
+    //reset self representative' status
+    [self.selfRepresentative reset];
+    //broadcast reset status
+    [self broadcastMembers:NO];
+    //notify delegate about status update
+    [self.delegate didUpdateUsers:[self allVoted]];
+    [self.delegate userReset];
+}
+
 - (void)welcomeSocket:(GCDAsyncSocket *)sock {
     sock.userData = [[OSUserRepresentative alloc] init];
     [self.writer writeMessage:@{kOSSocketEventKey:kOSSocketEventTypeWelcomeGuest} socket:sock];

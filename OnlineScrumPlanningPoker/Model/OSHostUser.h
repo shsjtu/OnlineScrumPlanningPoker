@@ -13,4 +13,9 @@
  * Reveal all members' votes
  */
 - (void)revealAllVotes;
+
+/*
+ * restart the meeting and reset all users' votes
+ */
+- (void)restartMeeting;
 @end

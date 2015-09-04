@@ -45,6 +45,7 @@ static const NSInteger kOSSocketPayloadTag = 2;
 #define kOSSocketEventTypeDenyGuest @"SocketEventTypeDenyGuest"
 #define kOSSocketEventTypeGuestVote @"SocketEventTypeGuestVote"
 #define kOSSocketEventTypeHostBroadcast @"SocketEventTypeHostBroadcast"
+#define kOSSocketEventTypeHostRestart @"SocketEventTypeHostRestart"
 
 #define kOSSocketNameKey @"SocketNameKey"
 #define kOSSocketInfoKey @"SocketInfoKey"
