@@ -100,6 +100,16 @@
     }
 }
 
+- (IBAction)helpAction:(id)sender {
+    NSString* message;
+    if ([self.user isHost]) {
+        message = @"As meeting host, you can make your vote and wait for the others to make thier choices. Then tap \"Show all votes\" to reveal the result.";
+    }else {
+        message = @"You just joined a meeting. Please make your vote and wait for the host to reveal the results.";
+    }
+    [OSGeneric displayError:message fromViewController:self];
+}
+
 #pragma mark - OSUserDelegate
 - (void)didUpdateUsers:(BOOL)readyToReveal{
     [self.tableView reloadData];
