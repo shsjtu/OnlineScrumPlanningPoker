@@ -14,6 +14,7 @@
 #import "OSHostsBrowserViewController.h"
 #import "OSHostUser.h"
 #import "OSGuestUser.h"
+#import "UIColor+More.h"
 
 #define kActionCell @"ActionCell"
 
@@ -106,7 +107,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"Start your meeting by:";
+    return @"Start your meeting:";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

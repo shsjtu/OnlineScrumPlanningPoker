@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = [NSString stringWithFormat:@"%@'s Meeting",self.user.meetingHostName];
-    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome, %@. Please vote.", self.user.name];
+    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome, %@! Please vote.", self.user.name];
     self.showAllButton.hidden = ![self.user isHost];
     self.restartButton.hidden = ![self.user isHost];
     self.showAllButton.enabled = NO;
@@ -106,7 +106,7 @@
     if([self.user isHost]) {
         if (readyToReveal) {
             if([(OSHostUser*)self.user allRevealed]){
-                self.welcomeLabel.text = [NSString stringWithFormat:@"Results revealed! Restart the next meeting."];
+                self.welcomeLabel.text = [NSString stringWithFormat:@"Results revealed!"];
             }else{
                 self.welcomeLabel.text = [NSString stringWithFormat:@"All voted. Please show all votes."];
             }
@@ -123,7 +123,7 @@
 
 - (void)userReset {
     self.voteButton.enabled = YES;
-     self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome, %@. Please vote.", self.user.name];
+     self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome, %@! Please vote.", self.user.name];
 }
 
 #pragma mark - OSGuestUserDelegate
