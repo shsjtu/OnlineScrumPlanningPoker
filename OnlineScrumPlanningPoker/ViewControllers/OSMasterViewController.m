@@ -31,11 +31,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadUserDefaults];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     NSString* ssid = [OSNetworkUtil wifiSSID];
     if(ssid) {
         self.currentNetworkLabel.text = [NSString stringWithFormat:@"My WIFI: \"%@\"", ssid];
     }else {
-        self.currentNetworkLabel.text = @"You are not connected to any WIFI";
+        self.currentNetworkLabel.text = @"Not connected to any WIFI";
     }
 }
 

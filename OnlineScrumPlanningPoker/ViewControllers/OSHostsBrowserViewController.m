@@ -11,6 +11,7 @@
 #import "OSConstants.h"
 #import "OSGuestUser.h"
 #import "OSGeneric.h"
+#import "OSNetworkUtil.h"
 
 
 #define HostsBrowserCellIdentifier @"HostsBrowserCellIdentifier"
@@ -33,6 +34,16 @@
          meetingController.user = self.guestUser;
          self.guestUser.guestDelegate = nil;
      }
+}
+- (IBAction)helpAction:(id)sender {
+    NSString* ssid = [OSNetworkUtil wifiSSID];
+    NSString* message = nil;
+    if(ssid) {
+        message = [NSString stringWithFormat:@"You are connected to: \"%@\". Please make sure the host is in the same WIFI.", ssid];
+    }else {
+        message = [NSString stringWithFormat:@"You are not connected to any WIFI. Please make sure to connect to the same WIFI as host"];
+    }
+    [OSGeneric displayError:message fromViewController:self];
 }
 
 #pragma mark - OSGuestUserDelegate

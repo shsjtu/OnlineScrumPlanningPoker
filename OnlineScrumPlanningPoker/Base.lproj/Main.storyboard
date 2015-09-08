@@ -26,13 +26,13 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My WIFI: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmC-27-ecc">
-                                <rect key="frame" x="31" y="164" width="538" height="20.5"/>
+                                <rect key="frame" x="31" y="164" width="538" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" red="0.69019607843137254" green="0.12156862745098039" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="30" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PcS-pR-3aR">
-                                <rect key="frame" x="21" y="219" width="558" height="130"/>
+                                <rect key="frame" x="21" y="220" width="558" height="130"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="sY0-Fk-AGZ"/>
@@ -43,7 +43,7 @@
                                 </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" alpha="0.69999999999999973" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="nep-4V-JHP">
-                                <rect key="frame" x="262.5" y="452" width="75" height="88"/>
+                                <rect key="frame" x="263" y="452" width="75" height="88"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -118,7 +118,13 @@
                             <constraint firstItem="9To-Ib-yb9" firstAttribute="leading" secondItem="YFf-iW-h49" secondAttribute="leadingMargin" constant="5" id="o1z-pr-M3P"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Meetings in Network" id="yVs-Uc-QMm"/>
+                    <navigationItem key="navigationItem" title="Meetings in Network" id="yVs-Uc-QMm">
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="Rzm-sO-l4v" userLabel="Help">
+                            <connections>
+                                <action selector="helpAction:" destination="xUw-8a-OBO" id="6YJ-M4-BOe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="hostsTableView" destination="9To-Ib-yb9" id="Il3-YC-5tr"/>
                         <segue destination="kiD-TZ-J6P" kind="custom" identifier="GuestToMeetingRoomSegue" customClass="GuestToMeetingRoomSegue" id="QAf-wc-kTh"/>
@@ -141,13 +147,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Planning Meeting!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goa-4J-Efd">
-                                <rect key="frame" x="21" y="30" width="558" height="18"/>
+                                <rect key="frame" x="21" y="74" width="558" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
                                 <color key="textColor" red="0.69019607839999997" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgW-Bo-8U3" userLabel="Divide Line">
-                                <rect key="frame" x="300" y="63" width="1" height="170"/>
+                                <rect key="frame" x="300" y="107" width="1" height="170"/>
                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="170" id="AbT-Cb-cDY"/>
@@ -155,7 +161,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCx-4i-N31" userLabel="Left Panel">
-                                <rect key="frame" x="16" y="63" width="284" height="170"/>
+                                <rect key="frame" x="16" y="107" width="284" height="170"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fug-01-BeM" customClass="OSPokerBaseView">
                                         <rect key="frame" x="92" y="4" width="100" height="162"/>
@@ -171,7 +177,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7Et-2o-xar">
-                                <rect key="frame" x="21" y="243" width="568" height="342"/>
+                                <rect key="frame" x="21" y="287" width="568" height="298"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MeetingBoardCellIdentifier" id="0Ua-Ib-HEg" customClass="OSMeetingBoardCellTableViewCell">
@@ -227,7 +233,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7If-de-A9p" userLabel="Right Panel">
-                                <rect key="frame" x="301" y="63" width="283" height="170"/>
+                                <rect key="frame" x="301" y="107" width="283" height="170"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqY-LX-qok">
                                         <rect key="frame" x="121" y="29" width="41" height="33"/>
@@ -335,6 +341,6 @@
         <image name="logo" width="75" height="88"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tlQ-zl-K28"/>
+        <segue reference="QAf-wc-kTh"/>
     </inferredMetricsTieBreakers>
 </document>
