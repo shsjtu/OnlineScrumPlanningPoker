@@ -31,21 +31,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadUserDefaults];
+    //add notification
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateWIFIInfo)
+                                                 name:UIApplicationWillEnterForegroundNotification object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidBecomeActiveNotification
+                                                  object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self updateWIFIInfo];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)updateWIFIInfo {
     NSString* ssid = [OSNetworkUtil wifiSSID];
     if(ssid) {
         self.currentNetworkLabel.text = [NSString stringWithFormat:@"My WIFI: \"%@\"", ssid];
     }else {
         self.currentNetworkLabel.text = @"Not connected to any WIFI";
     }
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)loadUserDefaults {

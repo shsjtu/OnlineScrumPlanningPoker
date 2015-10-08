@@ -110,9 +110,18 @@
     [OSGeneric displayError:message fromViewController:self];
 }
 
+- (void)reloadTableView {
+    [self.tableView beginUpdates];
+    [self.tableView deleteSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+
 #pragma mark - OSUserDelegate
 - (void)didUpdateUsers:(BOOL)readyToReveal{
-    [self.tableView reloadData];
+    [self reloadTableView];
     if([self.user isHost]) {
         if (readyToReveal) {
             if([(OSHostUser*)self.user allRevealed]){
