@@ -24,7 +24,7 @@
 
 @implementation OSHostUser
 - (NSInteger)maxCapacity {
-    return 6;
+    return 30;
 }
 
 - (instancetype)init {
